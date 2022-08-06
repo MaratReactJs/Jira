@@ -7,14 +7,14 @@ import {
 	faCopy,
 } from "@fortawesome/free-regular-svg-icons";
 
-const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
-	console.log(arrLog, "arrLog");
+const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 	const [show, setShow] = useState(false);
 	const logRef = useRef();
 
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e, item) => {
 		logRef.current.style.background = "yellow";
+		getArrItemLog(item);
 	};
 
 	//происходит, когда перетаскиваемый элемент покидает цель перетаскивания
@@ -31,8 +31,8 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 	// происходит, когда перетаскиваемый элемент перетаскивается на цель перетаскивания
 	const handleDrop = (e, item) => {
 		logRef.current.style.background = "blue";
-		e.preventDefault(e);
 		const upgradeItem = { ...item, id: Math.random() };
+		getArrItemLog(upgradeItem);
 
 		setArrLog([...arrLog, upgradeItem]);
 	};
@@ -42,12 +42,11 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 		logRef.current.style.background = "orange";
 		e.preventDefault(e);
 		setArrLog(arrLog.filter((el) => el.id !== item.id));
-		console.log(item, "itemID");
 	};
 
 	return (
 		<div
-			className="w-[95%] bg-[#f1f5f7] h-[8%] mt-[3%] ml-[2%] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black"
+			className="w-[95%] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[5px] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black"
 			onMouseOver={() => setShow(true)}
 			onMouseOut={() => setShow(false)}
 			draggable={true}
@@ -61,12 +60,12 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 				<Moment format="MMM YYYY">{Date.parse(logItem.date)}</Moment> - Название
 				карты
 			</div>
-			<div className="font-bold text-xs mt-[2.5%] ml-[10%] z-10 absolute ">
+			<div className="font-bold text-xs mt-[40px] ml-[140px] z-10 absolute ">
 				1h 22m
 			</div>
 			<div
 				className={
-					"w-[70px] h-[25px] bg-[#004976] text-white z-10 ml-[120px] mt-[5px] relative flex justify-around items-center   " +
+					"w-[70px] h-[25px] bg-[#004976] text-white z-10 ml-[112px] mt-[5px] relative flex justify-around items-center   " +
 					(!show ? "hidden " : "")
 				}>
 				<button onClick={() => deleteLog(id)} className="decoration-white">

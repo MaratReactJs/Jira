@@ -3,25 +3,33 @@ import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
-import Plan from "./plan";
 
 const Day = ({ date }) => {
 	const [arrLog, setArrLog] = useState([]);
-	const [arrPlan, setArrPlan] = useState([]);
 	const [hidden, setHidden] = useState(false);
+	const [arrItemLog, setArrItemLog] = useState();
+
+	console.log(arrItemLog, "chek");
+	const handleDropArr = (e, item) => {
+		//console.log(item.id, "item");
+		const upgradeItem = { ...item, date: date, id: Math.random() };
+		setArrLog([...arrLog, upgradeItem]);
+	};
+
+	const handleDragOverArr = (e) => {
+		e.preventDefault(e);
+	};
+
+	const getArrItemLog = (item) => {
+		setArrItemLog(item);
+	};
 
 	const createLog = (date) => {
 		setArrLog([...arrLog, { date, id: Math.random() }]);
 	};
-	const createPlan = (date) => {
-		setArrPlan([...arrPlan, { date, id: Math.random() }]);
-	};
 
 	const deleteLog = (id) => {
 		setArrLog(arrLog.filter((log) => log.id !== id));
-	};
-	const deletePlan = (id) => {
-		setArrPlan(arrPlan.filter((plan) => plan.id !== id));
 	};
 
 	return (
@@ -59,24 +67,27 @@ const Day = ({ date }) => {
 					className={
 						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
-					}
-					onClick={() => createPlan(date)}>
+					}>
 					Plan Time
 				</button>
 			</div>
-			{arrLog.map((d) => (
-				<Log
-					logItem={d}
-					key={d.id}
-					deleteLog={deleteLog}
-					id={d.id}
-					arrLog={arrLog}
-					setArrLog={setArrLog}
-				/>
-			))}
-			{arrPlan.map((d) => (
-				<Plan planItem={d} key={d.id} deletePlan={deletePlan} id={d.id} />
-			))}
+			<div
+				className="w-[200px] h-screen border border-[black]-500"
+				onDragOver={(e) => handleDragOverArr(e)}
+				onDrop={(e) => handleDropArr(e, arrItemLog)}>
+				{" "}
+				{arrLog.map((d) => (
+					<Log
+						logItem={d}
+						key={d.id}
+						deleteLog={deleteLog}
+						id={d.id}
+						arrLog={arrLog}
+						setArrLog={setArrLog}
+						getArrItemLog={getArrItemLog}
+					/>
+				))}
+			</div>
 		</div>
 	);
 };
