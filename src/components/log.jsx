@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,11 +9,9 @@ import {
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 	const [show, setShow] = useState(false);
-	const logRef = useRef();
 
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e, item) => {
-		logRef.current.style.background = "yellow";
 		getArrItemLog(item);
 	};
 
@@ -25,12 +23,10 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 	//происходит, когда перетаскиваемый элемент находится над целью перетаскивания
 	const handleDragOver = (e) => {
 		e.preventDefault(e);
-		logRef.current.style.background = "green";
 	};
 
 	// происходит, когда перетаскиваемый элемент перетаскивается на цель перетаскивания
 	const handleDrop = (e, item) => {
-		logRef.current.style.background = "blue";
 		const upgradeItem = { ...item, id: Math.random() };
 		getArrItemLog(upgradeItem);
 
@@ -39,7 +35,6 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 
 	//происходит, когда пользователь закончил перетаскивание элемента
 	const handleDragEnd = (e, item) => {
-		logRef.current.style.background = "orange";
 		e.preventDefault(e);
 		setArrLog(arrLog.filter((el) => el.id !== item.id));
 	};
@@ -54,8 +49,7 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 			/* 	onDragLeave={(e) => handleDragLeave(e)} */
 			onDragOver={(e) => handleDragOver(e)}
 			onDrop={(e) => handleDrop(e, logItem)}
-			onDragEnd={(e) => handleDragEnd(e, logItem)}
-			ref={logRef}>
+			onDragEnd={(e) => handleDragEnd(e, logItem)}>
 			<div className="font-bold text-xs z-10 absolute ml-2 mt-1">
 				<Moment format="MMM YYYY">{Date.parse(logItem.date)}</Moment> - Название
 				карты

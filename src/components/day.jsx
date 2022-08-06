@@ -9,9 +9,7 @@ const Day = ({ date }) => {
 	const [hidden, setHidden] = useState(false);
 	const [arrItemLog, setArrItemLog] = useState();
 
-	console.log(arrItemLog, "chek");
 	const handleDropArr = (e, item) => {
-		//console.log(item.id, "item");
 		const upgradeItem = { ...item, date: date, id: Math.random() };
 		setArrLog([...arrLog, upgradeItem]);
 	};
@@ -45,7 +43,7 @@ const Day = ({ date }) => {
 			<div className="w-3/6 h-[2px]  bg-[#d6e2e9] mt-[3%] mx-[3%] " />
 
 			<div
-				className="w-[200px]  h-[3,5%]  mt-[3%]   text-center flex justify-around  rounded "
+				className="w-[220px]  h-[3,5%]  mt-[5px]   text-center flex justify-around  rounded "
 				onMouseOut={() => setHidden(false)}
 				onMouseOver={() => setHidden(true)}>
 				<div
@@ -57,7 +55,7 @@ const Day = ({ date }) => {
 				</div>
 				<button
 					className={
-						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
+						"w-[105px] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
 					}
 					onClick={() => createLog(date)}>
@@ -65,14 +63,14 @@ const Day = ({ date }) => {
 				</button>
 				<button
 					className={
-						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
+						"w-[105px] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
 					}>
 					Plan Time
 				</button>
 			</div>
 			<div
-				className="w-[200px] h-screen border border-[black]-500"
+				className="w-[220px] h-screen "
 				onDragOver={(e) => handleDragOverArr(e)}
 				onDrop={(e) => handleDropArr(e, arrItemLog)}>
 				{" "}
