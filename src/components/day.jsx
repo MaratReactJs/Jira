@@ -27,7 +27,7 @@ const Day = ({ date }) => {
 	return (
 		<div
 			className={
-				"w-[15%] border border-[#001537]-500 min-h-screen mt-[1%] " +
+				"w-[300px] border border-[#001537]-500 min-h-screen mt-[5px] " +
 				(date.getDay() === new Date().getDay() ? "bg-[#f5f8fa]" : "")
 			}>
 			<div className="  flex justify-between  font-bold text-xs px-[3%] pt-[3%]">
@@ -37,7 +37,7 @@ const Day = ({ date }) => {
 			<div className="w-3/6 h-[2px]  bg-[#d6e2e9] mt-[3%] mx-[3%] " />
 
 			<div
-				className="w-[100%]  h-[3,5%]  mt-[3%]   text-center flex justify-around  rounded "
+				className="w-[200px]  h-[3,5%]  mt-[3%]   text-center flex justify-around  rounded "
 				onMouseOut={() => setHidden(false)}
 				onMouseOver={() => setHidden(true)}>
 				<div
@@ -65,10 +65,17 @@ const Day = ({ date }) => {
 				</button>
 			</div>
 			{arrLog.map((d) => (
-				<Log dayDate={d} key={d.id} deleteLog={deleteLog} id={d.id} />
+				<Log
+					logItem={d}
+					key={d.id}
+					deleteLog={deleteLog}
+					id={d.id}
+					arrLog={arrLog}
+					setArrLog={setArrLog}
+				/>
 			))}
 			{arrPlan.map((d) => (
-				<Plan dayDate={d} key={d.id} deletePlan={deletePlan} id={d.id} />
+				<Plan planItem={d} key={d.id} deletePlan={deletePlan} id={d.id} />
 			))}
 		</div>
 	);

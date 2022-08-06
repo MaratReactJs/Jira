@@ -7,7 +7,7 @@ import {
 	faCopy,
 } from "@fortawesome/free-regular-svg-icons";
 
-const Plan = ({ dayDate, deletePlan, id }) => {
+const Plan = ({ planItem, deletePlan, id }) => {
 	const [show, setShow] = useState(false);
 	return (
 		<div
@@ -15,8 +15,8 @@ const Plan = ({ dayDate, deletePlan, id }) => {
 			onMouseOver={() => setShow(true)}
 			onMouseOut={() => setShow(false)}>
 			<div className="font-bold text-xs z-10 absolute ml-2 mt-1 ">
-				<Moment format="MMM YYYY">{Date.parse(dayDate.date)}</Moment> - Название
-				карты
+				<Moment format="MMM YYYY">{Date.parse(planItem.date)}</Moment> -
+				Название карты
 			</div>
 
 			<div className="font-bold text-xs mt-[2.5%] ml-[10%] z-10 absolute ">

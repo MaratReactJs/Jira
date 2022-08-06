@@ -22,7 +22,7 @@ const Week = () => {
 	return (
 		<div className=" w-screen px-5 flex justify-between ]">
 			{week.map((d, i) => (
-				<Day date={d} key={i} />
+				<Day date={d} key={i} id={Math.random} />
 			))}
 		</div>
 	);
