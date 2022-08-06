@@ -8,16 +8,12 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
+	console.log(arrLog, "arrLog");
 	const [show, setShow] = useState(false);
 	const logRef = useRef();
 
-	const [currentArr, setCurrenArr] = useState([]);
-	const [currentItem, setCurrenItem] = useState([]);
-
 	//происходит, когда пользователь начинает перетаскивать элемент
-	const handleDragStart = (e, arr, item) => {
-		setCurrenArr(arr);
-		setCurrenItem(item);
+	const handleDragStart = (e, item) => {
 		logRef.current.style.background = "yellow";
 	};
 
@@ -33,22 +29,20 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 	};
 
 	// происходит, когда перетаскиваемый элемент перетаскивается на цель перетаскивания
-	const handleDrop = (e, arr, item) => {
+	const handleDrop = (e, item) => {
 		logRef.current.style.background = "blue";
 		e.preventDefault(e);
-		const currenIndex = currentArr.indexOf(currentItem);
-		console.log(currenIndex, "currenIndex");
-		currentArr.splice(currenIndex, 1);
-		console.log(currentArr, "currenArr");
-		const dropIndex = arr.indexOf(item);
-		arr.splice(dropIndex + 1, 0, currentItem);
-		setArrLog(currentArr);
+		const upgradeItem = { ...item, id: Math.random() };
+
+		setArrLog([...arrLog, upgradeItem]);
 	};
 
 	//происходит, когда пользователь закончил перетаскивание элемента
-	const handleDragEnd = (e) => {
+	const handleDragEnd = (e, item) => {
 		logRef.current.style.background = "orange";
 		e.preventDefault(e);
+		setArrLog(arrLog.filter((el) => el.id !== item.id));
+		console.log(item, "itemID");
 	};
 
 	return (
@@ -57,11 +51,11 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 			onMouseOver={() => setShow(true)}
 			onMouseOut={() => setShow(false)}
 			draggable={true}
-			onDragStart={(e) => handleDragStart(e, arrLog, logItem)}
+			onDragStart={(e) => handleDragStart(e, logItem)}
 			/* 	onDragLeave={(e) => handleDragLeave(e)} */
 			onDragOver={(e) => handleDragOver(e)}
-			onDrop={(e) => handleDrop(e, arrLog, logItem)}
-			onDragEnd={(e) => handleDragEnd(e)}
+			onDrop={(e) => handleDrop(e, logItem)}
+			onDragEnd={(e) => handleDragEnd(e, logItem)}
 			ref={logRef}>
 			<div className="font-bold text-xs z-10 absolute ml-2 mt-1">
 				<Moment format="MMM YYYY">{Date.parse(logItem.date)}</Moment> - Название
