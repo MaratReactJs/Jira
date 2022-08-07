@@ -26,25 +26,19 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 	};
 
 	// происходит, когда перетаскиваемый элемент перетаскивается на цель перетаскивания
-	const handleDrop = (e, item) => {
-		const upgradeItem = { ...item, id: Math.random() };
-		getArrItemLog(upgradeItem);
-
-		setArrLog([...arrLog, upgradeItem]);
-	};
+	const handleDrop = (e, item) => {};
 
 	//происходит, когда пользователь закончил перетаскивание элемента
 	const handleDragEnd = (e, item) => {
-		e.preventDefault(e);
 		setArrLog(arrLog.filter((el) => el.id !== item.id));
 	};
 
 	return (
 		<div
 			className="w-[95%] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[5px] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black"
+			draggable={true}
 			onMouseOver={() => setShow(true)}
 			onMouseOut={() => setShow(false)}
-			draggable={true}
 			onDragStart={(e) => handleDragStart(e, logItem)}
 			/* 	onDragLeave={(e) => handleDragLeave(e)} */
 			onDragOver={(e) => handleDragOver(e)}
