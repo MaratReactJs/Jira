@@ -33,7 +33,7 @@ const Day = ({ date }) => {
 	};
 
 	const createLog = (date) => {
-		setArrLog([...arrLog, { date, id: Math.random() }]);
+		setArrLog([...arrLog, { date, id: Math.random(), logTime: 0 }]);
 	};
 
 	const deleteLog = (id) => {
@@ -44,14 +44,16 @@ const Day = ({ date }) => {
 		<div
 			ref={dayRef}
 			className={
-				"w-[calc(100vw/7)] border-l box-border border-y border-[#dee3ed]  min-w-[150px] min-h-screen  select-none " +
+				"w-[calc(90vw/7)] border-l box-border border-y border-[#dee3ed]  min-w-[150px] min-h-screen  select-none " +
 				(date.getDay() === new Date().getDay() ? "bg-[#f5f8fa]" : "")
 			}>
 			<div className="  flex justify-between  font-bold text-xs px-[3%] pt-[3%]">
 				<Moment format="ddd DD.MM">{date}</Moment>
 				<div className="hours">0h of 0h</div>
 			</div>
-			<div className="w-3/6 h-[2px]  bg-[#d6e2e9] mt-[3%] mx-[3%] " />
+			<div>
+				<div className="w-3/6 h-[2px]  bg-[#d6e2e9] mt-[3%] mx-[3%] " />
+			</div>
 
 			<div
 				className="  h-[3,5%]  mt-[5px]   text-center flex justify-around  rounded "
@@ -66,7 +68,7 @@ const Day = ({ date }) => {
 				</div>
 				<button
 					className={
-						"w-[49%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
+						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
 					}
 					onClick={() => createLog(date)}>
@@ -74,7 +76,7 @@ const Day = ({ date }) => {
 				</button>
 				<button
 					className={
-						"w-[49%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
+						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
 					}>
 					Plan Time

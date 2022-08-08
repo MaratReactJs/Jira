@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Day from "./day";
+import ModalLog from "./modalLog";
 
 const Week = () => {
+	const [showModal, setShowModal] = useState(true);
 	let week = [];
 	let today = new Date();
 	function getStartDay(d) {
@@ -20,11 +22,15 @@ const Week = () => {
 	}
 
 	return (
-		<div className=" w-screen  flex justify-between ]">
-			{week.map((d, i) => (
-				<Day date={d} key={i} id={Math.random} />
-			))}
-		</div>
+		<>
+			{" "}
+			<div className={" w-[90vw] mx-auto h-[80vh]  flex mt-20  "}>
+				{week.map((d, i) => (
+					<Day date={d} key={i} id={Math.random} />
+				))}
+			</div>
+			{showModal && <ModalLog />}
+		</>
 	);
 };
 
