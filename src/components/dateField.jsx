@@ -10,19 +10,18 @@ const DateField = () => {
 		setDate(target.value);
 	};
 	return (
-		<div className="mt-[5%] text-[#004974] font-semibold w-[60%]">
+		<div className="mt-[5%] text-[#004974] font-semibold mr-[3%]">
 			<label
-				className="block text-sm font-medium text-[#004974]"
+				className="block text-xs font-medium text-[#004974] ml-[8%]"
 				htmlFor="date">
 				Date
 			</label>
-			<FontAwesomeIcon icon={faClock} className="w-[25px]  text-[#004974]" />
+			<FontAwesomeIcon icon={faClock} className=" mr-4 text-[#004974] " />
 
 			<input
-				className="border border-[#f09b3c] rounded p-[5px] focus:outline-none  focus:border-sky-500 w-[35%] "
+				className="border border-[#f09b3c] rounded p-[5px] focus:outline-none  focus:border-sky-500  "
 				name="date"
 				type="date"
-				format="MMM YYYY"
 				id="date"
 				value={date}
 				onChange={handleChange}

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import SearchField from "./searchField";
 import DateField from "./dateField";
+import TimeField from "./timeField";
 
 const ModalLog = () => {
 	return (
@@ -17,7 +18,12 @@ const ModalLog = () => {
 				</h1>
 				<div className=" w-[100%] bg-[#dee3ed] h-[1px] mt-[5%]"></div>
 				<SearchField />
-				<DateField />
+				<div className="flex ">
+					<DateField />
+					<TimeField />
+
+					{/* Set start and end time */}
+				</div>
 			</div>
 		</div>
 	);
