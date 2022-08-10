@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-const TimeField = () => {
-	const [time, setTime] = useState("");
+const TimeField = ({ value, onChange }) => {
 	const handleChange = ({ target }) => {
-		setTime(target.value);
+		onChange({ name: target.name, value: target.value });
 	};
 	return (
 		<div className=" mt-[5%] text-[#004974] font-semibold">
@@ -14,12 +13,14 @@ const TimeField = () => {
 			</label>
 			<input
 				type="text"
-				className="border border-[#f09b3c] rounded p-[5px] focus:outline-none  focus:border-sky-500 w-[40%] "
-				name="date"
-				value={time}
+				className="border border-[#f09b3c] rounded  focus:outline-none  focus:border-[#dee3ed] w-[40%] p-[6px] inline mr-[3%] mt-[0.5%]"
+				name="time"
+				value={value}
 				onChange={handleChange}
 				placeholder="0h"
+				id="time"
 			/>
+			<h2 className="inline ">Set start and end time</h2>
 		</div>
 	);
 };

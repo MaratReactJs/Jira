@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faClipboardList,
 	faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-const SearchField = () => {
-	const [search, setSearch] = useState("");
+const SearchField = ({ value, onChange }) => {
 	const handleChange = ({ target }) => {
-		setSearch(target.value);
+		onChange({ name: target.name, value: target.value });
 	};
 
 	return (
@@ -19,10 +18,13 @@ const SearchField = () => {
 			/>
 
 			<input
-				className="w-[100%] h-[40px] border border-[#f09b3c] rounded  focus:outline-none  focus:border-sky-500 pl-[10px] "
-				value={search}
-				onChange={handleChange}
+				className="w-[100%] h-[40px] border border-[#f09b3c] rounded  focus:outline-none  focus:border-[#dee3ed] pl-[10px] "
 				placeholder="Search issues"
+				name="search"
+				type="text"
+				id="search"
+				value={value}
+				onChange={handleChange}
 			/>
 			<FontAwesomeIcon
 				icon={faMagnifyingGlass}

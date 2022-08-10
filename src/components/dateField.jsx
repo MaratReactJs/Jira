@@ -1,29 +1,23 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 
-const DateField = () => {
-	const [date, setDate] = useState("");
-
+const DateField = ({ value, onChange }) => {
 	const handleChange = ({ target }) => {
-		console.log(target.value);
-		setDate(target.value);
+		onChange({ name: target.name, value: target.value });
 	};
 	return (
-		<div className="mt-[5%] text-[#004974] font-semibold mr-[3%]">
+		<div className="mt-[5.2%] text-[#004974] font-semibold mr-[3%]  ">
 			<label
-				className="block text-xs font-medium text-[#004974] ml-[8%]"
+				className=" block text-xs font-medium text-[#004974] "
 				htmlFor="date">
 				Date
 			</label>
-			<FontAwesomeIcon icon={faClock} className=" mr-4 text-[#004974] " />
 
 			<input
-				className="border border-[#f09b3c] rounded p-[5px] focus:outline-none  focus:border-sky-500  "
+				className=" border border-[#f09b3c] rounded p-[5px] focus:outline-none  focus:border-[#dee3ed] mt-[0.5%]  "
 				name="date"
 				type="date"
 				id="date"
-				value={date}
+				value={value}
 				onChange={handleChange}
 			/>
 		</div>
