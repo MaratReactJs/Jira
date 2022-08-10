@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
 
-const Day = ({ date, setShowModal }) => {
+const Day = ({ date, setShowModal, data }) => {
 	const [arrLog, setArrLog] = useState([]);
 	const [hidden, setHidden] = useState(false);
 	const [arrItemLog, setArrItemLog] = useState();
@@ -32,9 +32,9 @@ const Day = ({ date, setShowModal }) => {
 		setArrItemLog(item);
 	};
 
-	const createLog = (date) => {
+	const createLog = () => {
 		setShowModal(true);
-		setArrLog([...arrLog, { date, id: Math.random(), logTime: 0 }]);
+		setArrLog([...arrLog, { date: data.date, id: Math.random() }]);
 	};
 
 	const deleteLog = (id) => {
@@ -72,7 +72,7 @@ const Day = ({ date, setShowModal }) => {
 						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
 					}
-					onClick={() => createLog(date)}>
+					onClick={createLog}>
 					Log Time
 				</button>
 				<button
@@ -98,6 +98,7 @@ const Day = ({ date, setShowModal }) => {
 						arrLog={arrLog}
 						setArrLog={setArrLog}
 						getArrItemLog={getArrItemLog}
+						data={data}
 					/>
 				))}
 			</div>

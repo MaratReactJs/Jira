@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faClock } from "@fortawesome/free-solid-svg-icons";
 import SearchField from "./searchField";
@@ -7,28 +7,20 @@ import TimeField from "./timeField";
 import DescptionField from "./descptionField";
 import CheckboxField from "./checkboxField";
 
-const ModalLog = ({ setShowModal }) => {
-	const [data, setData] = useState({
-		checkbox: false,
-		date: "",
-		time: "",
-		description: "",
-		search: "",
-	});
-
+const ModalLog = ({ setShowModal, setData, data }) => {
 	const handleChange = (target) => {
 		setData((prevState) => ({ ...prevState, [target.name]: target.value }));
 	};
 	const handleSubmit = (e) => {
+		setShowModal(false);
 		e.preventDefault();
-		console.log(e.target.value);
 	};
 	return (
 		<div
 			className="w-[100vw] h-[100vh] bg-[#00497652] fixed top-0 left-0 flex justify-center items-center"
 			onClick={() => setShowModal(false)}>
 			<div
-				className=" p-[20px] rounded w-[30vw] h-[50vh] bg-white border  "
+				className="  p-[20px] rounded min-w-[30vw] min-h-[50vh] bg-white border  "
 				onClick={(e) => e.stopPropagation()}>
 				<form onSubmit={handleSubmit}>
 					{" "}
@@ -60,7 +52,6 @@ const ModalLog = ({ setShowModal }) => {
 							{" "}
 							<button
 								type="submit"
-								value={data}
 								className="font-medium text-white bg-[#004974] mr-[3%] hover:bg-[#0073a9] hover:text-white px-3 py-2 whitespace-nowrap rounded">
 								Log time
 							</button>

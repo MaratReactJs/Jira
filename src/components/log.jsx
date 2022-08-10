@@ -26,7 +26,7 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 	};
 
 	// происходит, когда перетаскиваемый элемент перетаскивается на цель перетаскивания
-	const handleDrop = (e, item) => {};
+	//const handleDrop = (e, item) => {};
 
 	//происходит, когда пользователь закончил перетаскивание элемента
 	const handleDragEnd = (e, item) => {
@@ -43,14 +43,14 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 				onDragStart={(e) => handleDragStart(e, logItem)}
 				/* 	onDragLeave={(e) => handleDragLeave(e)} */
 				onDragOver={(e) => handleDragOver(e)}
-				onDrop={(e) => handleDrop(e, logItem)}
+				/* onDrop={(e) => handleDrop(e, logItem)} */
 				onDragEnd={(e) => handleDragEnd(e, logItem)}>
 				<div className="font-bold text-xs z-0  ml-2 mt-1 absolute">
-					<Moment format="MMM YYYY">{Date.parse(logItem.date)}</Moment> -
-					Название карты
+					{/* <Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "} */}
+					{logItem.date}
 				</div>
 				<div className="font-bold text-xs mt-[40px]  ml-[10%] z-0 absolute ">
-					{logItem.logTime}h
+					h
 				</div>
 				<div
 					className={
