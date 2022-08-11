@@ -4,11 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
 
-const Day = ({ date, setShowModal, data }) => {
+const Day = ({ date, setShowModal }) => {
 	const [arrLog, setArrLog] = useState([]);
 	const [hidden, setHidden] = useState(false);
 	const [arrItemLog, setArrItemLog] = useState();
+
 	const dayRef = useRef();
+
+	const createLog = (date) => {
+		setShowModal(true);
+		setArrLog([...arrLog, { date: date, id: Math.random() }]);
+	};
 
 	const handleDragLeave = (e) => {
 		e.preventDefault();
@@ -30,11 +36,6 @@ const Day = ({ date, setShowModal, data }) => {
 
 	const getArrItemLog = (item) => {
 		setArrItemLog(item);
-	};
-
-	const createLog = () => {
-		setShowModal(true);
-		setArrLog([...arrLog, { date: data.date, id: Math.random() }]);
 	};
 
 	const deleteLog = (id) => {
@@ -72,7 +73,7 @@ const Day = ({ date, setShowModal, data }) => {
 						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
 					}
-					onClick={createLog}>
+					onClick={() => createLog(date)}>
 					Log Time
 				</button>
 				<button
@@ -98,7 +99,6 @@ const Day = ({ date, setShowModal, data }) => {
 						arrLog={arrLog}
 						setArrLog={setArrLog}
 						getArrItemLog={getArrItemLog}
-						data={data}
 					/>
 				))}
 			</div>

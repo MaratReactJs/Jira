@@ -9,6 +9,7 @@ import {
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 	const [show, setShow] = useState(false);
+	//console.log(logItem, "logItem");
 
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e, item) => {
@@ -46,15 +47,14 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
 				/* onDrop={(e) => handleDrop(e, logItem)} */
 				onDragEnd={(e) => handleDragEnd(e, logItem)}>
 				<div className="font-bold text-xs z-0  ml-2 mt-1 absolute">
-					{/* <Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "} */}
-					{logItem.date}
+					<Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "}
 				</div>
 				<div className="font-bold text-xs mt-[40px]  ml-[10%] z-0 absolute ">
 					h
 				</div>
 				<div
 					className={
-						"w-[70px] h-[25px] bg-[#004976] text-white z-10  relative flex justify-around items-center   " +
+						"w-[70px] h-[25px] bg-[#004976] text-white z-10  relative top-[5%] left-[65%] flex justify-around items-center   " +
 						(!show ? "hidden " : "")
 					}>
 					<button onClick={() => deleteLog(id)} className="decoration-white">

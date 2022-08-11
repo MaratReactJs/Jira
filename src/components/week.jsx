@@ -11,7 +11,6 @@ const Week = () => {
 		description: "",
 		search: "",
 	});
-
 	let week = [];
 	let today = new Date();
 	function getStartDay(d) {
@@ -34,13 +33,7 @@ const Week = () => {
 			{" "}
 			<div className={" w-[90vw] mx-auto h-[80vh]  flex mt-20  "}>
 				{week.map((d, i) => (
-					<Day
-						date={d}
-						key={i}
-						id={Math.random}
-						setShowModal={setShowModal}
-						data={data}
-					/>
+					<Day date={d} key={i} id={Math.random} setShowModal={setShowModal} />
 				))}
 			</div>
 			{showModal && (
