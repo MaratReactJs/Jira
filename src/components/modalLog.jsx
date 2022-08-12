@@ -1,11 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faClock } from "@fortawesome/free-solid-svg-icons";
-import SearchField from "./searchField";
-import DateField from "./dateField";
-import TimeField from "./timeField";
-import DescptionField from "./descptionField";
-import CheckboxField from "./checkboxField";
+import SearchField from "./form/searchField";
+import DateField from "./form/dateField";
+import TimeField from "./form/timeField";
+import DescptionField from "./form/descptionField";
+import CheckboxField from "./form/checkboxField";
 
 const ModalLog = ({ setShowModal, setData, data }) => {
 	const handleChange = (target) => {
