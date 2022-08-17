@@ -1,16 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Day from "./day";
-import ModalLog from "./modalLog";
 
 const Week = () => {
-	const [showModal, setShowModal] = useState(false);
-	const [data, setData] = useState({
-		checkbox: false,
-		date: "",
-		time: "",
-		description: "",
-		search: "",
-	});
 	let week = [];
 	let today = new Date();
 	function getStartDay(d) {
@@ -33,18 +24,9 @@ const Week = () => {
 			{" "}
 			<div className={" w-[90vw] mx-auto h-[80vh]  flex mt-20  "}>
 				{week.map((d, i) => (
-					<Day
-						date={d}
-						key={i}
-						id={Math.random}
-						setShowModal={setShowModal}
-						data={data}
-					/>
+					<Day date={d} key={i} />
 				))}
 			</div>
-			{showModal && (
-				<ModalLog setShowModal={setShowModal} setData={setData} data={data} />
-			)}
 		</>
 	);
 };

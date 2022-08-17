@@ -3,17 +3,29 @@ import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
+import ModalLog from "./modalLog";
+import { useCallback } from "react";
 
-const Day = ({ date, setShowModal, data }) => {
+const Day = ({ date }) => {
+	const [showModal, setShowModal] = useState(false);
+	const [data, setData] = useState({
+		checkbox: false,
+		date: "",
+		time: "",
+		description: "",
+		search: "",
+	});
 	const [arrLog, setArrLog] = useState([]);
 	const [hidden, setHidden] = useState(false);
 	const [arrItemLog, setArrItemLog] = useState();
-
 	const dayRef = useRef();
 
 	const createLog = () => {
 		setShowModal(true);
-		setArrLog([...arrLog, { date: date, id: Math.random() }]);
+		setArrLog([
+			...arrLog,
+			{ date: date.toISOString().slice(0, 10), id: Math.random() },
+		]);
 	};
 
 	const handleDragLeave = (e) => {
@@ -34,10 +46,9 @@ const Day = ({ date, setShowModal, data }) => {
 		dayRef.current.style.border = "2px dashed #004974";
 	};
 
-	const getArrItemLog = (item) => {
+	const getArrItemLog = useCallback((item) => {
 		setArrItemLog(item);
-	};
-
+	}, []);
 	const deleteLog = (id) => {
 		setArrLog(arrLog.filter((log) => log.id !== id));
 	};
@@ -99,9 +110,21 @@ const Day = ({ date, setShowModal, data }) => {
 						arrLog={arrLog}
 						setArrLog={setArrLog}
 						getArrItemLog={getArrItemLog}
+						arrItemLog={arrItemLog}
 					/>
 				))}
 			</div>
+			{showModal && (
+				<ModalLog
+					setShowModal={setShowModal}
+					setData={setData}
+					data={data}
+					arrItemLog={arrItemLog}
+					setArrItemLog={setArrItemLog}
+					setArrLog={setArrLog}
+					arrLog={arrLog}
+				/>
+			)}
 		</div>
 	);
 };

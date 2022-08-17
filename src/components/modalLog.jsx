@@ -7,18 +7,32 @@ import TimeField from "./form/timeField";
 import DescptionField from "./form/descptionField";
 import CheckboxField from "./form/checkboxField";
 
-const ModalLog = ({ setShowModal, setData, data }) => {
+const ModalLog = ({
+	setShowModal,
+	setData,
+	data,
+	arrItemLog,
+	setArrItemLog,
+	setArrLog,
+	arrLog,
+}) => {
 	const handleChange = (target) => {
 		setData((prevState) => ({ ...prevState, [target.name]: target.value }));
 	};
 	const handleSubmit = (e) => {
+		setArrItemLog((prevState) => ({ ...prevState, date: data.date }));
 		setShowModal(false);
 		e.preventDefault();
+	};
+
+	const removeItem = () => {
+		setShowModal(false);
+		setArrLog(arrLog.filter((log) => log.id !== arrItemLog.id));
 	};
 	return (
 		<div
 			className="w-[100vw] h-[100vh] bg-[#00497652] fixed top-0 left-0 flex justify-center items-center"
-			onClick={() => setShowModal(false)}>
+			onClick={removeItem}>
 			<div
 				className="  p-[20px] rounded min-w-[30vw] min-h-[50vh] bg-white border  "
 				onClick={(e) => e.stopPropagation()}>
@@ -55,7 +69,9 @@ const ModalLog = ({ setShowModal, setData, data }) => {
 								className="font-medium text-white bg-[#004974] mr-[3%] hover:bg-[#0073a9] hover:text-white px-3 py-2 whitespace-nowrap rounded">
 								Log time
 							</button>
-							<button className=" font-medium text-[#004974] mr-[3%] hover:bg-[#f5f8fa]  px-3  py-2 rounded hover:outline outline-offset-[-1px] outline-1">
+							<button
+								onClick={removeItem}
+								className=" font-medium text-[#004974] mr-[3%] hover:bg-[#f5f8fa]  px-3  py-2 rounded hover:outline outline-offset-[-1px] outline-1">
 								Cancel
 							</button>
 						</div>
