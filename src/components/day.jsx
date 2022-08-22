@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
 import ModalLog from "./modalLog";
-import { useCallback } from "react";
 
 const Day = ({ date }) => {
 	const [showModal, setShowModal] = useState(false);
@@ -17,8 +16,6 @@ const Day = ({ date }) => {
 	});
 	const [arrLog, setArrLog] = useState([]);
 	const [hidden, setHidden] = useState(false);
-	const [arrItemLog, setArrItemLog] = useState();
-	//console.log(arrItemLog, "aeee");
 
 	const dayRef = useRef();
 
@@ -48,9 +45,6 @@ const Day = ({ date }) => {
 		dayRef.current.style.border = "2px dashed #004974";
 	};
 
-	const getArrItemLog = useCallback((item) => {
-		setArrItemLog(item);
-	}, []);
 	const deleteLog = (id) => {
 		setArrLog(arrLog.filter((log) => log.id !== id));
 	};
@@ -100,7 +94,7 @@ const Day = ({ date }) => {
 			<div
 				className=" h-screen "
 				onDragOver={(e) => handleDragOverArr(e)}
-				onDrop={(e) => handleDropArr(e, arrItemLog)}
+				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
 				{" "}
 				{arrLog.map((d) => (
@@ -111,8 +105,6 @@ const Day = ({ date }) => {
 						id={d.id}
 						arrLog={arrLog}
 						setArrLog={setArrLog}
-						getArrItemLog={getArrItemLog}
-						arrItemLog={arrItemLog}
 					/>
 				))}
 			</div>
@@ -121,8 +113,6 @@ const Day = ({ date }) => {
 					setShowModal={setShowModal}
 					setData={setData}
 					data={data}
-					arrItemLog={arrItemLog}
-					setArrItemLog={setArrItemLog}
 					setArrLog={setArrLog}
 					arrLog={arrLog}
 				/>

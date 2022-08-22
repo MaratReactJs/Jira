@@ -11,8 +11,7 @@ const ModalLog = ({
 	setShowModal,
 	setData,
 	data,
-	arrItemLog,
-	setArrItemLog,
+
 	setArrLog,
 	arrLog,
 }) => {
@@ -20,14 +19,12 @@ const ModalLog = ({
 		setData((prevState) => ({ ...prevState, [target.name]: target.value }));
 	};
 	const handleSubmit = (e) => {
-		setArrItemLog((prevState) => ({ ...prevState, date: data.date }));
 		setShowModal(false);
 		e.preventDefault();
 	};
 
 	const removeItem = () => {
 		setShowModal(false);
-		setArrLog(arrLog.filter((log) => log.id !== arrItemLog.id));
 	};
 	return (
 		<div
