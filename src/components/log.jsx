@@ -8,7 +8,15 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 const Log = memo(
-	({ logItem, deleteLog, id, arrLog, setArrLog, getArrItemLog }) => {
+	({
+		logItem,
+		deleteLog,
+		id,
+		arrLog,
+		setArrLog,
+		getArrItemLog,
+		arrItemLog,
+	}) => {
 		const [show, setShow] = useState(false);
 
 		useEffect(() => {
@@ -35,6 +43,7 @@ const Log = memo(
 		const handleDragEnd = (e, item) => {
 			setArrLog(arrLog.filter((el) => el.id !== item.id));
 		};
+		console.log(arrItemLog, "dsdsds");
 
 		return (
 			<>
@@ -49,7 +58,9 @@ const Log = memo(
 					/* onDrop={(e) => handleDrop(e, logItem)} */
 					onDragEnd={(e) => handleDragEnd(e, logItem)}>
 					<div className="font-bold text-xs z-0  ml-2 mt-1 absolute">
-						<Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "}
+						<Moment format="DD MMM YYYY">
+							{Date.parse(arrItemLog && arrItemLog.date)}
+						</Moment>{" "}
 					</div>
 					<div className="font-bold text-xs mt-[40px]  ml-[10%] z-0 absolute ">
 						{logItem.time}h

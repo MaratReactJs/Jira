@@ -18,6 +18,8 @@ const Day = ({ date }) => {
 	const [arrLog, setArrLog] = useState([]);
 	const [hidden, setHidden] = useState(false);
 	const [arrItemLog, setArrItemLog] = useState();
+	//console.log(arrItemLog, "aeee");
+
 	const dayRef = useRef();
 
 	const createLog = () => {
