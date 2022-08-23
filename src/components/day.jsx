@@ -3,28 +3,34 @@ import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
-import ModalLog from "./modalLog";
 
-const Day = ({ date }) => {
-	const [showModal, setShowModal] = useState(false);
-	const [data, setData] = useState({
-		checkbox: false,
-		date: "",
-		time: "",
-		description: "",
-		search: "",
-	});
+import { useDispatch, useSelector } from "react-redux";
+import { selectLogs, setLog } from "../redux/logSlice";
+//import { selectData } from "../redux/dataSlice";
+
+const Day = ({ date, setShowModal }) => {
+	const dispatch = useDispatch();
+	const { logs } = useSelector(selectLogs);
+	//const { data } = useSelector(selectData);
+
 	const [arrLog, setArrLog] = useState([]);
+
+	for (let i = 0; i < logs.length; i++) {
+		console.log(logs[i].date, "logs");
+		console.log(date, "date");
+
+		if (logs[i].date === date) {
+			arrLog.push(logs[i]);
+		}
+	}
+
 	const [hidden, setHidden] = useState(false);
 
 	const dayRef = useRef();
 
 	const createLog = () => {
 		setShowModal(true);
-		setArrLog([
-			...arrLog,
-			{ date: date.toISOString().slice(0, 10), id: Math.random() },
-		]);
+		dispatch(setLog([{ date: date, id: Math.random() }]));
 	};
 
 	const handleDragLeave = (e) => {
@@ -35,7 +41,7 @@ const Day = ({ date }) => {
 
 	const handleDropArr = (e, item) => {
 		const upgradeItem = { ...item, date: date, id: Math.random() };
-		setArrLog([...arrLog, upgradeItem]);
+		dispatch(setLog([...logs, upgradeItem]));
 		dayRef.current.style.boxSizing = "border-box";
 		dayRef.current.style.border = "1px solid #dee3ed";
 	};
@@ -46,7 +52,7 @@ const Day = ({ date }) => {
 	};
 
 	const deleteLog = (id) => {
-		setArrLog(arrLog.filter((log) => log.id !== id));
+		dispatch(setLog(logs.filter((log) => log.id !== id)));
 	};
 
 	return (
@@ -108,15 +114,6 @@ const Day = ({ date }) => {
 					/>
 				))}
 			</div>
-			{showModal && (
-				<ModalLog
-					setShowModal={setShowModal}
-					setData={setData}
-					data={data}
-					setArrLog={setArrLog}
-					arrLog={arrLog}
-				/>
-			)}
 		</div>
 	);
 };

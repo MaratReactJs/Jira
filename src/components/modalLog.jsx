@@ -6,17 +6,14 @@ import DateField from "./form/dateField";
 import TimeField from "./form/timeField";
 import DescptionField from "./form/descptionField";
 import CheckboxField from "./form/checkboxField";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { selectData, setData } from "../redux/dataSlice";
 
-const ModalLog = ({
-	setShowModal,
-	setData,
-	data,
-
-	setArrLog,
-	arrLog,
-}) => {
+const ModalLog = ({ setShowModal }) => {
+	const { data } = useSelector(selectData);
+	const dispatch = useDispatch();
 	const handleChange = (target) => {
-		setData((prevState) => ({ ...prevState, [target.name]: target.value }));
+		dispatch(setData({ ...data, [target.name]: target.value }));
 	};
 	const handleSubmit = (e) => {
 		setShowModal(false);
