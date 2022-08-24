@@ -6,32 +6,37 @@ import Log from "./log";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogs, setLog } from "../redux/logSlice";
-//import { selectData } from "../redux/dataSlice";
+import { useEffect } from "react";
+import { useCallback } from "react";
 
-const Day = ({ date, setShowModal }) => {
+const Day = ({ date, setShowModal, data }) => {
+	//console.log(data.date, "data");
 	const dispatch = useDispatch();
 	const { logs } = useSelector(selectLogs);
-	//const { data } = useSelector(selectData);
 
 	const [arrLog, setArrLog] = useState([]);
+	//console.log(date.toISOString().slice(0, 16));
 
-	for (let i = 0; i < logs.length; i++) {
-		console.log(logs[i].date, "logs");
-		console.log(date, "date");
-
-		if (logs[i].date === date) {
-			arrLog.push(logs[i]);
+	useEffect(() => {
+		for (let i = 0; i < logs.length; i++) {
+			if (
+				logs[i].date.toISOString().slice(0, 16) ===
+				date.toISOString().slice(0, 16)
+			) {
+				arrLog.push(logs[i]);
+				dispatch(setLog(logs.filter((el) => el.id !== logs[i].id)));
+			}
 		}
-	}
+	}, [arrLog, date, logs, dispatch]);
 
 	const [hidden, setHidden] = useState(false);
 
 	const dayRef = useRef();
 
-	const createLog = () => {
+	const createLog = useCallback(() => {
 		setShowModal(true);
 		dispatch(setLog([{ date: date, id: Math.random() }]));
-	};
+	}, [date, dispatch, setShowModal]);
 
 	const handleDragLeave = (e) => {
 		e.preventDefault();
@@ -52,7 +57,7 @@ const Day = ({ date, setShowModal }) => {
 	};
 
 	const deleteLog = (id) => {
-		dispatch(setLog(logs.filter((log) => log.id !== id)));
+		setArrLog(arrLog.filter((log) => log.id !== id));
 	};
 
 	return (

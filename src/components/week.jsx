@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Day from "./day";
 import ModalLog from "./modalLog";
+import { selectData } from "../redux/dataSlice";
+import { useSelector } from "react-redux";
 
 const Week = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -12,6 +14,8 @@ const Week = () => {
 		let dayNumber = d.getDate() + (day ? -day : 0);
 		return new Date(d.setDate(dayNumber));
 	}
+	const { data } = useSelector(selectData);
+	//console.log(data.date, "data");
 
 	let startDay = new Date(
 		new Date(getStartDay(today).setDate(getStartDay(today).getDate() - 1))
@@ -26,7 +30,7 @@ const Week = () => {
 			{" "}
 			<div className={" w-[90vw] mx-auto h-[80vh]  flex mt-20  "}>
 				{week.map((d, i) => (
-					<Day date={d} key={i} setShowModal={setShowModal} />
+					<Day date={d} key={i} setShowModal={setShowModal} data={data} />
 				))}
 			</div>
 			{showModal && <ModalLog setShowModal={setShowModal} />}
