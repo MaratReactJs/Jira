@@ -7,10 +7,10 @@ import {
 	faCopy,
 } from "@fortawesome/free-regular-svg-icons";
 
-const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
+const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getItemLog }) => {
 	const [show, setShow] = useState(false);
-	console.log(logItem, "logItem");
-
+	//console.log(logItem, "logItem");
+	getItemLog(logItem);
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e, item) => {};
 
@@ -48,7 +48,7 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 					<Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "}
 				</div>
 				<div className="font-bold text-xs mt-[40px]  ml-[10%] z-0 absolute ">
-					h
+					{logItem.time}h
 				</div>
 				<div
 					className={

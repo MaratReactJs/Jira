@@ -19,6 +19,9 @@ const Day = ({ date }) => {
 	const { data } = useSelector(selectData);
 
 	const [arrLog, setArrLog] = useState([]);
+	const [itemLog, setItemLog] = useState();
+	console.log(itemLog && itemLog.time, "itemLog");
+
 	//console.log(date.toISOString().slice(0, 16));
 
 	useEffect(() => {
@@ -41,10 +44,15 @@ const Day = ({ date }) => {
 				{
 					date: data.date ? data.date : date.toISOString().slice(0, 10),
 					id: Math.random(),
+					time: data.time,
 				},
 			])
 		);
 	}, [date, dispatch, logs, data]);
+
+	const getItemLog = (item) => {
+		setItemLog(item);
+	};
 
 	const handleDragLeave = (e) => {
 		e.preventDefault();
@@ -53,10 +61,11 @@ const Day = ({ date }) => {
 	};
 
 	const handleDropArr = (e, item) => {
+		console.log(item, "item");
 		const upgradeItem = {
-			...item,
 			date: date.toISOString().slice(0, 10),
 			id: Math.random(),
+			time: data.time,
 		};
 		dispatch(setLog([...logs, upgradeItem]));
 		dayRef.current.style.boxSizing = "border-box";
@@ -117,7 +126,7 @@ const Day = ({ date }) => {
 			<div
 				className=" h-screen "
 				onDragOver={(e) => handleDragOverArr(e)}
-				onDrop={(e) => handleDropArr(e)}
+				onDrop={(e) => handleDropArr(e, itemLog)}
 				onDragLeave={(e) => handleDragLeave(e)}>
 				{" "}
 				{arrLog.map((d) => (
@@ -128,6 +137,7 @@ const Day = ({ date }) => {
 						id={d.id}
 						arrLog={arrLog}
 						setArrLog={setArrLog}
+						getItemLog={getItemLog}
 					/>
 				))}
 			</div>
