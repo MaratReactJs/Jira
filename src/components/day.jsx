@@ -3,40 +3,48 @@ import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
+import ModalLog from "./modalLog";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogs, setLog } from "../redux/logSlice";
 import { useEffect } from "react";
 import { useCallback } from "react";
+import { selectData } from "../redux/dataSlice";
 
-const Day = ({ date, setShowModal, data }) => {
+const Day = ({ date }) => {
+	const [showModal, setShowModal] = useState(false);
 	//console.log(data.date, "data");
 	const dispatch = useDispatch();
 	const { logs } = useSelector(selectLogs);
+	const { data } = useSelector(selectData);
 
 	const [arrLog, setArrLog] = useState([]);
 	//console.log(date.toISOString().slice(0, 16));
 
 	useEffect(() => {
 		for (let i = 0; i < logs.length; i++) {
-			if (
-				logs[i].date.toISOString().slice(0, 16) ===
-				date.toISOString().slice(0, 16)
-			) {
+			if (logs[i].date === date.toISOString().slice(0, 10)) {
 				arrLog.push(logs[i]);
 				dispatch(setLog(logs.filter((el) => el.id !== logs[i].id)));
 			}
 		}
-	}, [arrLog, date, logs, dispatch]);
+	}, [arrLog, date, logs, dispatch, data]);
 
 	const [hidden, setHidden] = useState(false);
 
 	const dayRef = useRef();
 
 	const createLog = useCallback(() => {
-		setShowModal(true);
-		dispatch(setLog([{ date: date, id: Math.random() }]));
-	}, [date, dispatch, setShowModal]);
+		dispatch(
+			setLog([
+				...logs,
+				{
+					date: data.date ? data.date : date.toISOString().slice(0, 10),
+					id: Math.random(),
+				},
+			])
+		);
+	}, [date, dispatch, logs, data]);
 
 	const handleDragLeave = (e) => {
 		e.preventDefault();
@@ -45,7 +53,11 @@ const Day = ({ date, setShowModal, data }) => {
 	};
 
 	const handleDropArr = (e, item) => {
-		const upgradeItem = { ...item, date: date, id: Math.random() };
+		const upgradeItem = {
+			...item,
+			date: date.toISOString().slice(0, 10),
+			id: Math.random(),
+		};
 		dispatch(setLog([...logs, upgradeItem]));
 		dayRef.current.style.boxSizing = "border-box";
 		dayRef.current.style.border = "1px solid #dee3ed";
@@ -91,7 +103,7 @@ const Day = ({ date, setShowModal, data }) => {
 						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
 						(!hidden ? "hidden" : "")
 					}
-					onClick={() => createLog()}>
+					onClick={() => setShowModal(true)}>
 					Log Time
 				</button>
 				<button
@@ -119,6 +131,9 @@ const Day = ({ date, setShowModal, data }) => {
 					/>
 				))}
 			</div>
+			{showModal && (
+				<ModalLog setShowModal={setShowModal} createLog={createLog} />
+			)}
 		</div>
 	);
 };

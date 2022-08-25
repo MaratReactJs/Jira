@@ -9,6 +9,7 @@ import {
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 	const [show, setShow] = useState(false);
+	console.log(logItem, "logItem");
 
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e, item) => {};
