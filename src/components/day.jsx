@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -7,9 +7,8 @@ import ModalLog from "./modalLog";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogs, setLog } from "../redux/logSlice";
-import { useEffect } from "react";
-import { useCallback } from "react";
 import { selectData } from "../redux/dataSlice";
+import { selectItemLog } from "../redux/itemLogSlice";
 
 const Day = ({ date }) => {
 	const [showModal, setShowModal] = useState(false);
@@ -17,12 +16,9 @@ const Day = ({ date }) => {
 	const dispatch = useDispatch();
 	const { logs } = useSelector(selectLogs);
 	const { data } = useSelector(selectData);
-
+	const { itemLog } = useSelector(selectItemLog);
 	const [arrLog, setArrLog] = useState([]);
-	const [itemLog, setItemLog] = useState();
-	console.log(itemLog && itemLog.time, "itemLog");
-
-	//console.log(date.toISOString().slice(0, 16));
+	console.log(arrLog, "arrLog");
 
 	useEffect(() => {
 		for (let i = 0; i < logs.length; i++) {
@@ -50,22 +46,17 @@ const Day = ({ date }) => {
 		);
 	}, [date, dispatch, logs, data]);
 
-	const getItemLog = (item) => {
-		setItemLog(item);
-	};
-
 	const handleDragLeave = (e) => {
 		e.preventDefault();
 		dayRef.current.style.boxSizing = "border-box";
 		dayRef.current.style.border = "1px solid #dee3ed";
 	};
 
-	const handleDropArr = (e, item) => {
-		console.log(item, "item");
+	const handleDropArr = (e) => {
 		const upgradeItem = {
 			date: date.toISOString().slice(0, 10),
 			id: Math.random(),
-			time: data.time,
+			time: itemLog.time,
 		};
 		dispatch(setLog([...logs, upgradeItem]));
 		dayRef.current.style.boxSizing = "border-box";
@@ -126,7 +117,7 @@ const Day = ({ date }) => {
 			<div
 				className=" h-screen "
 				onDragOver={(e) => handleDragOverArr(e)}
-				onDrop={(e) => handleDropArr(e, itemLog)}
+				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
 				{" "}
 				{arrLog.map((d) => (
@@ -137,7 +128,6 @@ const Day = ({ date }) => {
 						id={d.id}
 						arrLog={arrLog}
 						setArrLog={setArrLog}
-						getItemLog={getItemLog}
 					/>
 				))}
 			</div>

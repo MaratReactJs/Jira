@@ -4,7 +4,7 @@ const initialState = {
 	data: {
 		checkbox: false,
 		date: "",
-		time: "",
+		time: 0,
 		description: "",
 		search: "",
 	},

@@ -6,18 +6,22 @@ import {
 	faPenToSquare,
 	faCopy,
 } from "@fortawesome/free-regular-svg-icons";
+import { useDispatch } from "react-redux";
+import { setItemLog } from "../redux/itemLogSlice";
 
-const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getItemLog }) => {
+const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
+	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
-	//console.log(logItem, "logItem");
-	getItemLog(logItem);
+
 	//происходит, когда пользователь начинает перетаскивать элемент
-	const handleDragStart = (e, item) => {};
+	const handleDragStart = (e) => {
+		dispatch(setItemLog(logItem));
+	};
 
 	//происходит, когда перетаскиваемый элемент покидает цель перетаскивания
-	/* const handleDragLeave = (e) => {
-		logRef.current.style.background = "red";
-	}; */
+	const handleDragLeave = (e) => {
+		//logRef.current.style.background = "red";
+	};
 
 	//происходит, когда перетаскиваемый элемент находится над целью перетаскивания
 	const handleDragOver = (e) => {
@@ -35,12 +39,12 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, getItemLog }) => {
 	return (
 		<>
 			<div
-				className="w-[95%] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[5px] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black z-20"
+				className="w-[95%] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[5px] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black z-20 "
 				draggable={true}
 				onMouseOver={() => setShow(true)}
 				onMouseOut={() => setShow(false)}
 				onDragStart={(e) => handleDragStart(e, logItem)}
-				/* 	onDragLeave={(e) => handleDragLeave(e)} */
+				onDragLeave={(e) => handleDragLeave(e)}
 				onDragOver={(e) => handleDragOver(e)}
 				/* onDrop={(e) => handleDrop(e, logItem)} */
 				onDragEnd={(e) => handleDragEnd(e, logItem)}>
