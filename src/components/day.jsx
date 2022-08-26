@@ -18,7 +18,9 @@ const Day = ({ date }) => {
 	const { data } = useSelector(selectData);
 	const { itemLog } = useSelector(selectItemLog);
 	const [arrLog, setArrLog] = useState([]);
-	console.log(arrLog, "arrLog");
+
+	const timeArr = arrLog.map((item) => item.time);
+	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
 
 	useEffect(() => {
 		for (let i = 0; i < logs.length; i++) {
@@ -81,7 +83,7 @@ const Day = ({ date }) => {
 			}>
 			<div className="  flex justify-between  font-bold text-xs px-[3%] pt-[3%]">
 				<Moment format="ddd DD.MM">{date}</Moment>
-				<div className="hours">0h of 0h</div>
+				<div className="hours">{timeSum}h of 0h</div>
 			</div>
 			<div>
 				<div className="w-3/6 h-[2px]  bg-[#d6e2e9] mt-[3%] mx-[3%] " />
