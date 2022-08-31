@@ -12,7 +12,7 @@ const TimeField = ({ value, onChange }) => {
 				Duration
 			</label>
 			<input
-				type="time"
+				type="text"
 				className="border border-[#f09b3c] rounded  focus:outline-none  focus:border-[#dee3ed] w-[40%] p-[6px] inline mr-[3%] mt-[0.5%]"
 				name="time"
 				value={value}

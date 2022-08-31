@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
 import ModalLog from "./modalLog";
+import { getTimeFromMins } from "../utils/getTimeFromMins";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogs, setLog } from "../redux/logSlice";
@@ -83,10 +84,18 @@ const Day = ({ date }) => {
 			}>
 			<div className="  flex justify-between  font-bold text-xs px-[3%] pt-[3%]">
 				<Moment format="ddd DD.MM">{date}</Moment>
-				<div className="hours">{timeSum}h of 0h</div>
+				<div className="hours">
+					{date.toString().slice(0, 3) === "Sun"
+						? "0h of 0h"
+						: date.toString().slice(0, 3) === "Sat"
+						? "0h of 0h"
+						: timeSum === 0
+						? "0h of 8h"
+						: getTimeFromMins(timeSum) + "  of 8h"}
+				</div>
 			</div>
-			<div>
-				<div className="w-3/6 h-[2px]  bg-[#d6e2e9] mt-[3%] mx-[3%] " />
+			<div className=" h-[5px]  bg-[#d6e2e9] mt-[3%] mx-[3%] rounded">
+				<div className=" h-[5px]  bg-[#00b481] mt-[3%] mx-[3%] rounded"></div>
 			</div>
 
 			<div

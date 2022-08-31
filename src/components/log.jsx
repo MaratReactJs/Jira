@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { setItemLog } from "../redux/itemLogSlice";
+import { getTimeFromMins } from "../utils/getTimeFromMins";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 	const dispatch = useDispatch();
@@ -51,8 +52,8 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 				<div className="font-bold text-xs z-0  ml-2 mt-1 absolute">
 					<Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "}
 				</div>
-				<div className="font-bold text-xs mt-[40px]  ml-[10%] z-0 absolute ">
-					{logItem.time}h
+				<div className="font-bold text-xs mt-[40px]  ml-[9%] z-0 absolute ">
+					{getTimeFromMins(logItem.time)}
 				</div>
 				<div
 					className={
