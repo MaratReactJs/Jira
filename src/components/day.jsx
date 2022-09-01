@@ -5,6 +5,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
 import ModalLog from "./modalLog";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
+import { getBlockWidth } from "../utils/getBlockWidth";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogs, setLog } from "../redux/logSlice";
@@ -22,8 +23,7 @@ const Day = ({ date }) => {
 
 	const timeArr = arrLog.map((item) => item.time);
 	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
-	let percent = (timeSum / 800) * 100;
-	console.log(percent, "percent");
+	let percent = Math.ceil((timeSum / 480) * 100);
 
 	useEffect(() => {
 		for (let i = 0; i < logs.length; i++) {
@@ -96,11 +96,11 @@ const Day = ({ date }) => {
 						: getTimeFromMins(timeSum) + "  of 8h"}
 				</div>
 			</div>
-			<div className=" h-[3px]  bg-[#d6e2e9] mt-[3%] mx-[3%] rounded">
+			<div className="h-[3px]  bg-[#d6e2e9] mt-[3%] mx-[3%] rounded">
 				<div
-					className={
-						"h-[3px]  bg-[#00b481]  rounded w-[" + percent + "%]"
-					}></div>
+					className={`${getBlockWidth(
+						percent
+					)} h-[100%] bg-[#00b481]  rounded `}></div>
 			</div>
 
 			<div
