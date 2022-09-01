@@ -40,7 +40,7 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 	return (
 		<>
 			<div
-				className="w-[95%] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[5px] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black z-20 "
+				className="w-[94%] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[8px] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black z-20 "
 				draggable={true}
 				onMouseOver={() => setShow(true)}
 				onMouseOut={() => setShow(false)}
