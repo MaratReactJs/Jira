@@ -109,14 +109,14 @@ const Day = ({ date }) => {
 				onMouseOver={() => setHidden(true)}>
 				<div
 					className={
-						"w-[95%] bg-[#ebf1f4] h-[23px]  text-center " +
+						"w-[95%] bg-[#ebf1f4] h-[23px]  text-center rounded " +
 						(hidden ? "hidden " : "")
 					}>
 					<FontAwesomeIcon icon={faPlus} />
 				</div>
 				<button
 					className={
-						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
+						"w-[48%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] rounded " +
 						(!hidden ? "hidden" : "")
 					}
 					onClick={() => setShowModal(true)}>
@@ -124,7 +124,7 @@ const Day = ({ date }) => {
 				</button>
 				<button
 					className={
-						"w-[46%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] " +
+						"w-[48%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] rounded " +
 						(!hidden ? "hidden" : "")
 					}>
 					Plan Time
