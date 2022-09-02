@@ -131,7 +131,7 @@ const Day = ({ date }) => {
 				</button>
 			</div>
 			<div
-				className=""
+				className="min-h-[100%]"
 				onDragOver={(e) => handleDragOverArr(e)}
 				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
