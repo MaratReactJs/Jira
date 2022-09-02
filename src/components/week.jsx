@@ -1,5 +1,12 @@
 import React from "react";
 import Day from "./day";
+import Moment from "react-moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faCalendarDays,
+	faAngleLeft,
+	faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Week = () => {
 	let week = [];
@@ -11,7 +18,7 @@ const Week = () => {
 		return new Date(d.setDate(dayNumber));
 	}
 
-	//console.log(data.date, "data");
+	console.log(week, "week");
 
 	let startDay = new Date(
 		new Date(getStartDay(today).setDate(getStartDay(today).getDate() - 1))
@@ -23,8 +30,23 @@ const Week = () => {
 
 	return (
 		<>
-			{" "}
-			<div className={" w-[90vw] mx-auto h-[80vh]  flex mt-20  "}>
+			<div className="w-[90vw] h-[5vh] mx-auto border-[#dee3ed]  border-t mt-10">
+				<div className="w-[18vw] min-h-[100%]  flex justify-evenly items-center">
+					<FontAwesomeIcon icon={faCalendarDays} />{" "}
+					<p>
+						<Moment format="MMM D">{week[0]}</Moment> -
+						<Moment format=" MMM D, yyy">{week[week.length - 1]}</Moment>{" "}
+					</p>
+					<button>
+						<FontAwesomeIcon icon={faAngleLeft} />
+					</button>
+					<button>
+						<FontAwesomeIcon icon={faAngleRight} />
+					</button>
+					<button>Today</button>
+				</div>
+			</div>{" "}
+			<div className={" w-[90vw] mx-auto h-[88vh]  flex   "}>
 				{week.map((d, i) => (
 					<Day date={d} key={i} />
 				))}

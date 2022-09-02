@@ -81,7 +81,7 @@ const Day = ({ date }) => {
 		<div
 			ref={dayRef}
 			className={
-				"w-[calc(90vw/7)] border-l box-border border-y border-[#dee3ed]  min-w-[150px] min-h-screen  select-none " +
+				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[150px]  select-none " +
 				(date.getDay() === new Date().getDay() ? "bg-[#f5f8fa]" : "")
 			}>
 			<div className="  flex justify-between  font-bold text-xs px-[3%] pt-[3%]">
@@ -131,7 +131,7 @@ const Day = ({ date }) => {
 				</button>
 			</div>
 			<div
-				className=" h-screen "
+				className=""
 				onDragOver={(e) => handleDragOverArr(e)}
 				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
