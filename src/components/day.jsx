@@ -85,7 +85,9 @@ const Day = ({ date }) => {
 			ref={dayRef}
 			className={
 				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[150px]  select-none  " +
-				(date.getDay() === new Date().getDay() ? "bg-[#f5f8fa]" : "")
+				(date.toString().slice(0, 10) === new Date().toString().slice(0, 10)
+					? "bg-[#f5f8fa]"
+					: "")
 			}>
 			<div className="  flex justify-between  font-bold text-xs px-[3%] pt-[3%]">
 				<Moment format="ddd DD.MM">{date}</Moment>
