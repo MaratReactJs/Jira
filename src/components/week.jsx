@@ -18,8 +18,6 @@ const Week = () => {
 		return new Date(d.setDate(dayNumber));
 	}
 
-	console.log(week, "week");
-
 	let startDay = new Date(
 		new Date(getStartDay(today).setDate(getStartDay(today).getDate() - 1))
 	);
@@ -30,8 +28,8 @@ const Week = () => {
 
 	return (
 		<>
-			<div className="w-[90vw] h-[5vh] mx-auto border-[#dee3ed]  border-t mt-10">
-				<div className="w-[18vw] min-h-[100%]  flex justify-evenly items-center">
+			<div className="w-[90vw] h-[5vh] mx-auto border-[#dee3ed]  border-t mt-6">
+				<div className="w-[18vw] min-h-[100%] min-w-[350px]  flex justify-evenly items-center">
 					<FontAwesomeIcon icon={faCalendarDays} />{" "}
 					<p>
 						<Moment format="MMM D">{week[0]}</Moment> -

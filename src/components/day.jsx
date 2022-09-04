@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLogs, setLog } from "../redux/logSlice";
 import { selectData } from "../redux/dataSlice";
 import { selectItemLog } from "../redux/itemLogSlice";
+import { setDragEnd } from "../redux/dragEndSlice";
 
 const Day = ({ date }) => {
 	const [showModal, setShowModal] = useState(false);
@@ -64,6 +65,8 @@ const Day = ({ date }) => {
 			time: itemLog.time,
 		};
 		dispatch(setLog([...logs, upgradeItem]));
+		dispatch(setDragEnd(true));
+
 		dayRef.current.style.boxSizing = "border-box";
 		dayRef.current.style.border = "1px solid #dee3ed";
 	};
@@ -81,7 +84,7 @@ const Day = ({ date }) => {
 		<div
 			ref={dayRef}
 			className={
-				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[150px]  select-none " +
+				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[150px]  select-none  " +
 				(date.getDay() === new Date().getDay() ? "bg-[#f5f8fa]" : "")
 			}>
 			<div className="  flex justify-between  font-bold text-xs px-[3%] pt-[3%]">

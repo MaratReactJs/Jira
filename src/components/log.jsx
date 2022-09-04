@@ -6,11 +6,14 @@ import {
 	faPenToSquare,
 	faCopy,
 } from "@fortawesome/free-regular-svg-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setItemLog } from "../redux/itemLogSlice";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
+import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
+	const { dragEnd } = useSelector(selectDragEnd);
+
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
 
@@ -34,13 +37,17 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 
 	//происходит, когда пользователь закончил перетаскивание элемента
 	const handleDragEnd = (e, item) => {
-		setArrLog(arrLog.filter((el) => el.id !== item.id));
+		if (dragEnd)
+			return setArrLog(
+				arrLog.filter((el) => el.id !== item.id),
+				dispatch(setDragEnd(false))
+			);
 	};
 
 	return (
 		<>
 			<div
-				className="w-[94%] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[8px] text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black z-20 "
+				className=" w-[94%] min-w-[100px] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[3%]  text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black z-20 "
 				draggable={true}
 				onMouseOver={() => setShow(true)}
 				onMouseOut={() => setShow(false)}
@@ -52,12 +59,12 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 				<div className="font-bold text-xs z-0  ml-2 mt-1 absolute">
 					<Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "}
 				</div>
-				<div className="font-bold text-xs mt-[40px]  ml-[9%] z-0 absolute ">
+				<div className="font-bold text-xs mt-[40px]  ml-[8%] z-0 fixed ">
 					{getTimeFromMins(logItem.time)}
 				</div>
 				<div
 					className={
-						"w-[70px] h-[25px] bg-[#004976] text-white z-10  relative top-[5%] left-[65%] flex justify-around items-center   " +
+						"w-[40%] h-[25px] bg-[#004976] text-white z-10  relative top-[5%] left-[58%] flex justify-around items-center rounded  " +
 						(!show ? "hidden " : "")
 					}>
 					<button onClick={() => deleteLog(id)} className="decoration-white">
