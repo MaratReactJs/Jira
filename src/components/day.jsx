@@ -21,6 +21,10 @@ const Day = ({ date }) => {
 	const { data } = useSelector(selectData);
 	const { itemLog } = useSelector(selectItemLog);
 	const [arrLog, setArrLog] = useState([]);
+	console.log(logs);
+	if (!localStorage.getItem("logs")) {
+		localStorage.setItem("logs", JSON.stringify(logs));
+	}
 
 	const timeArr = arrLog.map((item) => item.time);
 	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
