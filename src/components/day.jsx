@@ -21,10 +21,8 @@ const Day = ({ date }) => {
 	const { data } = useSelector(selectData);
 	const { itemLog } = useSelector(selectItemLog);
 	const [arrLog, setArrLog] = useState([]);
-	console.log(logs);
-	if (!localStorage.getItem("logs")) {
-		localStorage.setItem("logs", JSON.stringify(logs));
-	}
+
+	localStorage.setItem("logs", JSON.stringify(logs));
 
 	const timeArr = arrLog.map((item) => item.time);
 	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
@@ -33,8 +31,9 @@ const Day = ({ date }) => {
 	useEffect(() => {
 		for (let i = 0; i < logs.length; i++) {
 			if (logs[i].date === date.toISOString().slice(0, 10)) {
-				arrLog.push(logs[i]);
-				dispatch(setLog(logs.filter((el) => el.id !== logs[i].id)));
+				//setArrLog([...arrLog, logs[i]]);
+				//arrLog.push(logs[i]);
+				//dispatch(setLog(logs.filter((el) => el.id !== logs[i].id)));
 			}
 		}
 	}, [arrLog, date, logs, dispatch, data]);
