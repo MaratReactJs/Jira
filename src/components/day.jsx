@@ -13,7 +13,7 @@ import { selectData } from "../redux/dataSlice";
 import { selectItemLog } from "../redux/itemLogSlice";
 import { setDragEnd } from "../redux/dragEndSlice";
 
-const Day = ({ date }) => {
+const Day = ({ date, minusWeek }) => {
 	const [showModal, setShowModal] = useState(false);
 	//console.log(data.date, "data");
 	const dispatch = useDispatch();
@@ -29,10 +29,14 @@ const Day = ({ date }) => {
 	let percent = Math.ceil((timeSum / 480) * 100);
 
 	useEffect(() => {
+		setArrLog([]);
+	}, [minusWeek]);
+
+	useEffect(() => {
 		for (let i = 0; i < logs.length; i++) {
 			if (logs[i].date === date.toISOString().slice(0, 10)) {
-				//setArrLog([...arrLog, logs[i]]);
-				//arrLog.push(logs[i]);
+				arrLog.push(logs[i]);
+
 				//dispatch(setLog(logs.filter((el) => el.id !== logs[i].id)));
 			}
 		}

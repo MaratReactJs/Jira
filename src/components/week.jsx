@@ -28,6 +28,14 @@ const Week = () => {
 		week.push(newDate);
 	}
 
+	const minusWeek = () => {
+		setCountWeek((prevstate) => prevstate - 7);
+	};
+
+	const plusWeek = () => {
+		setCountWeek((prevstate) => prevstate + 7);
+	};
+
 	return (
 		<>
 			<div className="w-[90vw] h-[5vh] mx-auto border-[#dee3ed]  border-t mt-6">
@@ -37,10 +45,10 @@ const Week = () => {
 						<Moment format="MMM D">{week[0]}</Moment> -
 						<Moment format=" MMM D, yyy">{week[week.length - 1]}</Moment>{" "}
 					</p>
-					<button onClick={() => setCountWeek((prevstate) => prevstate - 7)}>
+					<button onClick={minusWeek}>
 						<FontAwesomeIcon icon={faAngleLeft} />
 					</button>
-					<button onClick={() => setCountWeek((prevstate) => prevstate + 7)}>
+					<button onClick={plusWeek}>
 						<FontAwesomeIcon icon={faAngleRight} />
 					</button>
 					<button className="border border-[#dee3ed] rounded px-2 ">
@@ -50,7 +58,7 @@ const Week = () => {
 			</div>{" "}
 			<div className={" w-[90vw] mx-auto h-[88vh]  flex    "}>
 				{week.map((d, i) => (
-					<Day date={d} key={i} />
+					<Day date={d} key={i} minusWeek={minusWeek} />
 				))}
 			</div>
 		</>
