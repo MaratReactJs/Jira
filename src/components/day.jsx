@@ -13,7 +13,7 @@ import { selectData } from "../redux/dataSlice";
 import { selectItemLog } from "../redux/itemLogSlice";
 import { setDragEnd } from "../redux/dragEndSlice";
 
-const Day = ({ date, minusWeek }) => {
+const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 	const [showModal, setShowModal] = useState(false);
 	//console.log(data.date, "data");
 	const dispatch = useDispatch();
@@ -24,15 +24,12 @@ const Day = ({ date, minusWeek }) => {
 
 	localStorage.setItem("logs", JSON.stringify(logs));
 
-	const timeArr = arrLog.map((item) => item.time);
-	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
-	let percent = Math.ceil((timeSum / 480) * 100);
-
 	useEffect(() => {
 		setArrLog([]);
 	}, [minusWeek]);
 
-	useEffect(() => {
+	if (isSubmit) {
+		console.log("сработал");
 		for (let i = 0; i < logs.length; i++) {
 			if (logs[i].date === date.toISOString().slice(0, 10)) {
 				arrLog.push(logs[i]);
@@ -40,9 +37,12 @@ const Day = ({ date, minusWeek }) => {
 				//dispatch(setLog(logs.filter((el) => el.id !== logs[i].id)));
 			}
 		}
-	}, [arrLog, date, logs, dispatch, data]);
+	}
 
 	const [hidden, setHidden] = useState(false);
+	const timeArr = arrLog.map((item) => item.time);
+	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
+	let percent = Math.ceil((timeSum / 480) * 100);
 
 	const dayRef = useRef();
 
@@ -160,7 +160,11 @@ const Day = ({ date, minusWeek }) => {
 				))}
 			</div>
 			{showModal && (
-				<ModalLog setShowModal={setShowModal} createLog={createLog} />
+				<ModalLog
+					setShowModal={setShowModal}
+					createLog={createLog}
+					setIsSubmit={setIsSubmit}
+				/>
 			)}
 		</div>
 	);

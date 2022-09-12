@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Week = () => {
+	const [isSubmit, setIsSubmit] = useState(false);
+	console.log(isSubmit);
 	const [countWeek, setCountWeek] = useState(0);
 	let week = [];
 	let today = new Date();
@@ -58,7 +60,13 @@ const Week = () => {
 			</div>{" "}
 			<div className={" w-[90vw] mx-auto h-[88vh]  flex    "}>
 				{week.map((d, i) => (
-					<Day date={d} key={i} minusWeek={minusWeek} />
+					<Day
+						date={d}
+						key={i}
+						minusWeek={minusWeek}
+						isSubmit={isSubmit}
+						setIsSubmit={setIsSubmit}
+					/>
 				))}
 			</div>
 		</>
