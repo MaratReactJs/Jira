@@ -10,7 +10,7 @@ import {
 
 const Week = () => {
 	const [isSubmit, setIsSubmit] = useState(false);
-	console.log(isSubmit);
+
 	const [countWeek, setCountWeek] = useState(0);
 	let week = [];
 	let today = new Date();
@@ -53,7 +53,9 @@ const Week = () => {
 					<button onClick={plusWeek}>
 						<FontAwesomeIcon icon={faAngleRight} />
 					</button>
-					<button className="border border-[#dee3ed] rounded px-2 ">
+					<button
+						onClick={() => setCountWeek(0)}
+						className="border border-[#dee3ed] rounded px-2 ">
 						Today
 					</button>
 				</div>

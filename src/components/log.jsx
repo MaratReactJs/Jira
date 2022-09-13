@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setItemLog } from "../redux/itemLogSlice";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
+import { removeLog } from "../redux/logSlice";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 	const { dragEnd } = useSelector(selectDragEnd);
@@ -40,7 +41,8 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 		if (dragEnd)
 			return setArrLog(
 				arrLog.filter((el) => el.id !== item.id),
-				dispatch(setDragEnd(false))
+				dispatch(setDragEnd(false)),
+				dispatch(removeLog(id))
 			);
 	};
 

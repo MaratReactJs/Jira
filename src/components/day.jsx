@@ -8,7 +8,7 @@ import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { getBlockWidth } from "../utils/getBlockWidth";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectLogs, setLog } from "../redux/logSlice";
+import { selectLogs, setLog, removeLog } from "../redux/logSlice";
 import { selectData } from "../redux/dataSlice";
 import { selectItemLog } from "../redux/itemLogSlice";
 import { setDragEnd } from "../redux/dragEndSlice";
@@ -29,12 +29,12 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 	}, [minusWeek]);
 
 	if (isSubmit) {
-		console.log("сработал");
 		for (let i = 0; i < logs.length; i++) {
-			if (logs[i].date === date.toISOString().slice(0, 10)) {
+			if (
+				arrLog.find((log) => log.id === logs[i].id) !== logs[i] &&
+				logs[i].date === date.toISOString().slice(0, 10)
+			) {
 				arrLog.push(logs[i]);
-
-				//dispatch(setLog(logs.filter((el) => el.id !== logs[i].id)));
 			}
 		}
 	}
@@ -85,6 +85,7 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 
 	const deleteLog = (id) => {
 		setArrLog(arrLog.filter((log) => log.id !== id));
+		dispatch(removeLog(id));
 	};
 
 	return (
