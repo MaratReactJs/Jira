@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/jira/static/css/main.c6662d24.css",
-    "main.js": "/jira/static/js/main.e0bd58a5.js",
+    "main.js": "/jira/static/js/main.014ee852.js",
     "index.html": "/jira/index.html",
     "main.c6662d24.css.map": "/jira/static/css/main.c6662d24.css.map",
-    "main.e0bd58a5.js.map": "/jira/static/js/main.e0bd58a5.js.map"
+    "main.014ee852.js.map": "/jira/static/js/main.014ee852.js.map"
   },
   "entrypoints": [
     "static/css/main.c6662d24.css",
-    "static/js/main.e0bd58a5.js"
+    "static/js/main.014ee852.js"
   ]
 }
