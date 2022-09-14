@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Moment from "react-moment";
+import EditTimeRecord from "./editTimeRecord";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faTrashCan,
@@ -13,10 +14,17 @@ import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
 import { removeLog } from "../redux/logSlice";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
+	const [showEditTimeRecord, setShowEditTimeRecord] = useState(false);
 	const { dragEnd } = useSelector(selectDragEnd);
 
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
+
+	const onEdit = (item) => {
+		dispatch(setItemLog(logItem));
+
+		setShowEditTimeRecord(true);
+	};
 
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e) => {
@@ -72,7 +80,7 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 					<button onClick={() => deleteLog(id)} className="decoration-white">
 						<FontAwesomeIcon icon={faTrashCan} className="w-[12px] " />
 					</button>
-					<button>
+					<button onClick={() => onEdit(logItem)}>
 						<FontAwesomeIcon icon={faPenToSquare} className="w-[12px]" />
 					</button>
 					<button>
@@ -80,6 +88,14 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 					</button>
 				</div>
 			</div>
+			{showEditTimeRecord && (
+				<EditTimeRecord
+					setShowEditTimeRecord={setShowEditTimeRecord}
+					arrLog={arrLog}
+					setArrLog={setArrLog}
+					id={id}
+				/>
+			)}
 		</>
 	);
 };
