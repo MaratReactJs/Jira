@@ -157,6 +157,7 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 						id={d.id}
 						arrLog={arrLog}
 						setArrLog={setArrLog}
+						date={date}
 					/>
 				))}
 			</div>

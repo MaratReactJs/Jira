@@ -10,7 +10,13 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selectData, setData } from "../redux/dataSlice";
 import { selectLogs, setLog, removeLog } from "../redux/logSlice";
 
-const EditTimeRecord = ({ setShowEditTimeRecord, arrLog, setArrLog, id }) => {
+const EditTimeRecord = ({
+	setShowEditTimeRecord,
+	arrLog,
+	setArrLog,
+	id,
+	date,
+}) => {
 	const { data } = useSelector(selectData);
 
 	const { logs } = useSelector(selectLogs);
@@ -24,7 +30,7 @@ const EditTimeRecord = ({ setShowEditTimeRecord, arrLog, setArrLog, id }) => {
 		e.preventDefault();
 
 		const upgradeItemLog = {
-			date: data.date,
+			date: data.date ? data.date : date.toISOString().slice(0, 10),
 			id: Math.random(),
 			time: data.time,
 		};

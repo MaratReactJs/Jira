@@ -12,18 +12,32 @@ import { setItemLog } from "../redux/itemLogSlice";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
 import { removeLog } from "../redux/logSlice";
+import { selectData } from "../redux/dataSlice";
+import { selectLogs, setLog } from "../redux/logSlice";
 
-const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
+const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
+	const { data } = useSelector(selectData);
+	const { logs } = useSelector(selectLogs);
 	const [showEditTimeRecord, setShowEditTimeRecord] = useState(false);
 	const { dragEnd } = useSelector(selectDragEnd);
 
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
 
-	const onEdit = (item) => {
+	const onEdit = () => {
 		dispatch(setItemLog(logItem));
 
 		setShowEditTimeRecord(true);
+	};
+
+	const copyLog = () => {
+		const upgradeCopyLog = {
+			date: data.date ? data.date : date.toISOString().slice(0, 10),
+			id: Math.random(),
+			time: data.time,
+		};
+
+		dispatch(setLog([...logs, upgradeCopyLog]));
 	};
 
 	//происходит, когда пользователь начинает перетаскивать элемент
@@ -80,10 +94,10 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 					<button onClick={() => deleteLog(id)} className="decoration-white">
 						<FontAwesomeIcon icon={faTrashCan} className="w-[12px] " />
 					</button>
-					<button onClick={() => onEdit(logItem)}>
+					<button onClick={onEdit}>
 						<FontAwesomeIcon icon={faPenToSquare} className="w-[12px]" />
 					</button>
-					<button>
+					<button onClick={copyLog}>
 						<FontAwesomeIcon icon={faCopy} className="w-[12px]" />
 					</button>
 				</div>
@@ -94,6 +108,7 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog }) => {
 					arrLog={arrLog}
 					setArrLog={setArrLog}
 					id={id}
+					date={date}
 				/>
 			)}
 		</>
