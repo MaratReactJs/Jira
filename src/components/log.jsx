@@ -79,10 +79,10 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 				onDragOver={(e) => handleDragOver(e)}
 				/* onDrop={(e) => handleDrop(e, logItem)} */
 				onDragEnd={(e) => handleDragEnd(e, logItem)}>
-				<div className="font-bold text-xs z-0  ml-2 mt-1 absolute">
+				<div className="font-bold text-xs  ml-2 mt-1 absolute">
 					<Moment format="DD MMM YYYY">{Date.parse(logItem.date)}</Moment>{" "}
 				</div>
-				<div className="font-bold text-xs mt-[40px]  ml-[8%] z-0 fixed ">
+				<div className="font-bold text-xs mt-[40px]  ml-[8%] fixed ">
 					{getTimeFromMins(logItem.time)}
 				</div>
 				<div
