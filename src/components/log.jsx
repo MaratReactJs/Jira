@@ -12,11 +12,10 @@ import { setItemLog } from "../redux/itemLogSlice";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
 import { removeLog } from "../redux/logSlice";
-import { selectData } from "../redux/dataSlice";
+
 import { selectLogs, setLog } from "../redux/logSlice";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
-	const { data } = useSelector(selectData);
 	const { logs } = useSelector(selectLogs);
 	const [showEditTimeRecord, setShowEditTimeRecord] = useState(false);
 	const { dragEnd } = useSelector(selectDragEnd);
@@ -32,9 +31,9 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 
 	const copyLog = () => {
 		const upgradeCopyLog = {
-			date: data.date ? data.date : date.toISOString().slice(0, 10),
+			date: logItem.date,
 			id: Math.random(),
-			time: data.time,
+			time: logItem.time,
 		};
 
 		dispatch(setLog([...logs, upgradeCopyLog]));
