@@ -82,7 +82,7 @@ const EditTimeRecord = ({
 							<button
 								type="submit"
 								className="font-medium text-white bg-[#004974] mr-[3%] hover:bg-[#0073a9] hover:text-white px-3 py-2 whitespace-nowrap rounded">
-								Upgrate
+								Update
 							</button>
 							<button
 								onClick={closeEditModal}

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Log from "./log";
 import ModalLog from "./modalLog";
+import ModalPlan from "./modalPlan";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { getBlockWidth } from "../utils/getBlockWidth";
 
@@ -14,7 +15,8 @@ import { selectItemLog } from "../redux/itemLogSlice";
 import { setDragEnd } from "../redux/dragEndSlice";
 
 const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
-	const [showModal, setShowModal] = useState(false);
+	const [showLog, setShowLog] = useState(false);
+	const [showPlan, setShowPlan] = useState(false);
 	//console.log(data.date, "data");
 	const dispatch = useDispatch();
 	const { logs } = useSelector(selectLogs);
@@ -132,14 +134,15 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 						"w-[45%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] rounded " +
 						(!hidden ? "hidden" : "")
 					}
-					onClick={() => setShowModal(true)}>
+					onClick={() => setShowLog(true)}>
 					Log Time
 				</button>
 				<button
 					className={
 						"w-[45%] bg-[#ebf1f4] h-[23px] font-bold text-xs text-center hover:bg-[#d6e2e9] rounded " +
 						(!hidden ? "hidden" : "")
-					}>
+					}
+					onClick={() => setShowPlan(true)}>
 					Plan Time
 				</button>
 			</div>
@@ -161,9 +164,16 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 					/>
 				))}
 			</div>
-			{showModal && (
+			{showLog && (
 				<ModalLog
-					setShowModal={setShowModal}
+					setShowLog={setShowLog}
+					createLog={createLog}
+					setIsSubmit={setIsSubmit}
+				/>
+			)}
+			{showPlan && (
+				<ModalPlan
+					setShowPlan={setShowPlan}
 					createLog={createLog}
 					setIsSubmit={setIsSubmit}
 				/>
