@@ -4,6 +4,11 @@ import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selectData, setData } from "../redux/dataSlice";
+import SelectField from "./form/selectField";
+import DescptionField_2 from "./form/descptionField_2";
+import CheckboxField from "./form/checkboxField";
+import DateField from "./form/dateField";
+import TimeField from "./form/timeField";
 
 const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 	const { data } = useSelector(selectData);
@@ -26,7 +31,7 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 			className="w-[100vw] h-[100vh] bg-[#00497652] fixed top-0 left-0 flex justify-center items-center z-20"
 			onClick={removeItem}>
 			<div
-				className="w-[24vw] h-[70vh] p-[20px] rounded min-w-[10vw] min-h-[50vh] bg-white border  "
+				className="w-[26vw] h-[70vh] p-[20px] rounded min-w-[10vw] min-h-[50vh] bg-white border  "
 				onClick={(e) => e.stopPropagation()}>
 				<form onSubmit={handleSubmit}>
 					<div>
@@ -40,6 +45,22 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 					</div>
 
 					<div className=" bg-[#dee3ed] h-[1px] mt-[5%]"></div>
+
+					<div className="border border-[#dee3ed] h-[40px] mt-[5%] rounded flex justify-between">
+						<div className="w-[50%] bg-[#adc4d3] text-[#466079] font-semibold flex justify-center items-center rounded">
+							Issue
+						</div>
+						<div className="w-[50%]  text-[#466079] font-semibold flex justify-center items-center rounded">
+							Project
+						</div>
+					</div>
+
+					<SelectField />
+					<DescptionField_2 onChange={handleChange} value={data.description} />
+					<CheckboxField />
+					<DateField />
+					<TimeField />
+					<SelectField />
 
 					<div className="mt-[15%]   flex items-center justify-end">
 						<div className="flex">
