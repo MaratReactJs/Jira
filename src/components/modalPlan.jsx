@@ -5,10 +5,12 @@ import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selectData, setData } from "../redux/dataSlice";
 import SelectField from "./form/selectField";
-import DescptionField_2 from "./form/descptionField_2";
-import CheckboxField from "./form/checkboxField";
-import DateField from "./form/dateField";
-import TimeField from "./form/timeField";
+import DescptionFieldTwo from "./form/descptionFieldTwo";
+import CheckboxFieldTwo from "./form/checkboxFieldTwo";
+import DateFieldTwo from "./form/dateFieldTwo";
+import FromField from "./form/fromField";
+import ToField from "./form/toField";
+import TimeFieldTwo from "./form/timeFieldTwo";
 
 const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 	const { data } = useSelector(selectData);
@@ -16,6 +18,7 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 	const handleChange = (target) => {
 		dispatch(setData({ ...data, [target.name]: target.value }));
 	};
+
 	const handleSubmit = (e) => {
 		createLog();
 		setShowPlan(false);
@@ -23,6 +26,7 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 		setIsSubmit(true);
 	};
 
+	console.log(data);
 	const removeItem = () => {
 		setShowPlan(false);
 	};
@@ -31,7 +35,7 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 			className="w-[100vw] h-[100vh] bg-[#00497652] fixed top-0 left-0 flex justify-center items-center z-20"
 			onClick={removeItem}>
 			<div
-				className="w-[26vw] h-[70vh] p-[20px] rounded min-w-[10vw] min-h-[50vh] bg-white border  "
+				className="w-[30vw] h-[70vh] p-[20px] rounded min-w-[10vw] min-h-[50vh] bg-white border  "
 				onClick={(e) => e.stopPropagation()}>
 				<form onSubmit={handleSubmit}>
 					<div>
@@ -55,12 +59,22 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 						</div>
 					</div>
 
-					<SelectField />
-					<DescptionField_2 onChange={handleChange} value={data.description} />
-					<CheckboxField />
-					<DateField />
-					<TimeField />
-					<SelectField />
+					<SelectField onChange={handleChange} value={data.descriptionTwo} />
+					<DescptionFieldTwo
+						onChange={handleChange}
+						value={data.descriptionTwo}
+					/>
+					<CheckboxFieldTwo
+						onChange={handleChange}
+						value={data.checkboxTwo}
+						name="checkboxTwo"
+					/>
+					<DateFieldTwo onChange={handleChange} value={data.date} />
+					<div className="mt-[3%] ">
+						<FromField onChange={handleChange} value={data.fromField} />{" "}
+						<ToField onChange={handleChange} value={data.toField} />
+					</div>
+					<TimeFieldTwo onChange={handleChange} value={data.timeFieldTwo} />
 
 					<div className="mt-[15%]   flex items-center justify-end">
 						<div className="flex">

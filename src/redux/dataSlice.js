@@ -7,6 +7,12 @@ const initialState = {
 		time: "",
 		description: "",
 		search: "",
+		descriptionTwo: "",
+		selectField: "",
+		checkboxTwo: false,
+		fromField: "",
+		toField: "",
+		timeFieldTwo: "",
 	},
 };
 

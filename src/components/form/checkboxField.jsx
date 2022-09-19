@@ -8,12 +8,13 @@ const CheckboxField = ({ value, onChange, name }) => {
 	return (
 		<div className=" flex justify-evenly items-center">
 			<input
-				className="w-[20px] h-[20px] border border-[#004974] outline-none"
+				className="w-[20px] h-[20px]  outline-none accent-[#dee3ed] border-[red]"
 				type="checkbox"
 				id="checkbox"
 				value=""
 				onChange={handleChange}
 				checked={value}
+				name="checkbox"
 			/>
 			<label
 				htmlFor="checkbox"
