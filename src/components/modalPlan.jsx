@@ -11,6 +11,7 @@ import DateFieldTwo from "./form/dateFieldTwo";
 import FromField from "./form/fromField";
 import ToField from "./form/toField";
 import TimeFieldTwo from "./form/timeFieldTwo";
+import SelectFieldTwo from "./form/selectFieldTwo";
 
 const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 	const { data } = useSelector(selectData);
@@ -35,7 +36,7 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 			className="w-[100vw] h-[100vh] bg-[#00497652] fixed top-0 left-0 flex justify-center items-center z-20"
 			onClick={removeItem}>
 			<div
-				className="w-[30vw] h-[70vh] p-[20px] rounded min-w-[10vw] min-h-[50vh] bg-white border  "
+				className="min-w-[30vw] min-h-[70vh] p-[20px] rounded min-w-[10vw] min-h-[50vh] bg-white border  "
 				onClick={(e) => e.stopPropagation()}>
 				<form onSubmit={handleSubmit}>
 					<div>
@@ -59,7 +60,7 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 						</div>
 					</div>
 
-					<SelectField onChange={handleChange} value={data.descriptionTwo} />
+					<SelectField onChange={handleChange} value={data.slectField} />
 					<DescptionFieldTwo
 						onChange={handleChange}
 						value={data.descriptionTwo}
@@ -75,8 +76,9 @@ const ModalPlan = ({ setShowPlan, createLog, setIsSubmit }) => {
 						<ToField onChange={handleChange} value={data.toField} />
 					</div>
 					<TimeFieldTwo onChange={handleChange} value={data.timeFieldTwo} />
+					<SelectFieldTwo onChange={handleChange} value={data.selectFieldTwo} />
 
-					<div className="mt-[15%]   flex items-center justify-end">
+					<div className="mt-[10%]   flex items-center justify-end">
 						<div className="flex">
 							{" "}
 							<button

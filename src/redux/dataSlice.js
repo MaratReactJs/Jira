@@ -13,6 +13,7 @@ const initialState = {
 		fromField: "",
 		toField: "",
 		timeFieldTwo: "",
+		selectFieldTwo: "",
 	},
 };
 
