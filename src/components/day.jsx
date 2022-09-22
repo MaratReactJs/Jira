@@ -1,30 +1,29 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import Moment from "react-moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
 import Log from "./log";
+import Plan from "./plan";
 import ModalLog from "./modalLog";
 import ModalPlan from "./modalPlan";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { getBlockWidth } from "../utils/getBlockWidth";
-
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogs, setLog, removeLog } from "../redux/logSlice";
 import { selectData } from "../redux/dataSlice";
 import { selectItemLog } from "../redux/itemLogSlice";
 import { setDragEnd } from "../redux/dragEndSlice";
 import { removePlan, selectPlan, setPlan } from "../redux/planSlice";
-import Plan from "./plan";
 import { selectItemPlan } from "../redux/itemPlanSlice";
 import { selectDragStartLog } from "../redux/dragStartLogSlice";
 import { selectDragStartPlan } from "../redux/dragStartPlanSlice";
 
 const Day = ({ date, minusWeek }) => {
+	const [arrLog, setArrLog] = useState([]);
+	const [arrPlan, setArrPlan] = useState([]);
 	const [showLog, setShowLog] = useState(false);
 	const [showPlan, setShowPlan] = useState(false);
-
-	const dispatch = useDispatch();
+	const [hidden, setHidden] = useState(false);
 	const { logs } = useSelector(selectLogs);
 	const { plans } = useSelector(selectPlan);
 	const { data } = useSelector(selectData);
@@ -32,39 +31,16 @@ const Day = ({ date, minusWeek }) => {
 	const { itemPlan } = useSelector(selectItemPlan);
 	const { dragStartLog } = useSelector(selectDragStartLog);
 	const { dragStartPlan } = useSelector(selectDragStartPlan);
-
-	const [arrLog, setArrLog] = useState([]);
-	const [arrPlan, setArrPlan] = useState([]);
+	const dispatch = useDispatch();
+	const timeArr = arrLog.map((item) => item.time);
+	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
+	const dayRef = useRef();
+	let percent = Math.ceil((timeSum / 480) * 100);
 
 	useEffect(() => {
 		setArrLog([]);
 		setArrPlan([]);
 	}, [minusWeek]);
-
-	for (let i = 0; i < logs.length; i++) {
-		if (
-			arrLog.find((log) => log.id === logs[i].id) !== logs[i] &&
-			logs[i].date === date.toISOString().slice(0, 10)
-		) {
-			arrLog.push(logs[i]);
-		}
-	}
-
-	for (let i = 0; i < plans.length; i++) {
-		if (
-			arrPlan.find((plan) => plan.id === plans[i].id) !== plans[i] &&
-			plans[i].date === date.toISOString().slice(0, 10)
-		) {
-			arrPlan.push(plans[i]);
-		}
-	}
-
-	const [hidden, setHidden] = useState(false);
-	const timeArr = arrLog.map((item) => item.time);
-	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
-	let percent = Math.ceil((timeSum / 480) * 100);
-
-	const dayRef = useRef();
 
 	const createLog = useCallback(() => {
 		dispatch(
@@ -92,6 +68,35 @@ const Day = ({ date, minusWeek }) => {
 		);
 	}, [date, dispatch, plans, data]);
 
+	const deleteLog = (id) => {
+		setArrLog(arrLog.filter((log) => log.id !== id));
+		dispatch(removeLog(id));
+	};
+
+	const deletePlan = (id) => {
+		setArrPlan(arrPlan.filter((plan) => plan.id !== id));
+		dispatch(removePlan(id));
+	};
+
+	for (let i = 0; i < logs.length; i++) {
+		if (
+			arrLog.find((log) => log.id === logs[i].id) !== logs[i] &&
+			logs[i].date === date.toISOString().slice(0, 10)
+		) {
+			arrLog.push(logs[i]);
+		}
+	}
+
+	for (let i = 0; i < plans.length; i++) {
+		if (
+			arrPlan.find((plan) => plan.id === plans[i].id) !== plans[i] &&
+			plans[i].date === date.toISOString().slice(0, 10)
+		) {
+			arrPlan.push(plans[i]);
+		}
+	}
+
+	//Drag-and-drop
 	const handleDragLeave = (e) => {
 		e.preventDefault();
 		dayRef.current.style.boxSizing = "border-box";
@@ -126,16 +131,6 @@ const Day = ({ date, minusWeek }) => {
 	const handleDragOverArr = (e) => {
 		e.preventDefault(e);
 		dayRef.current.style.border = "2px dashed #004974";
-	};
-
-	const deleteLog = (id) => {
-		setArrLog(arrLog.filter((log) => log.id !== id));
-		dispatch(removeLog(id));
-	};
-
-	const deletePlan = (id) => {
-		setArrPlan(arrPlan.filter((plan) => plan.id !== id));
-		dispatch(removePlan(id));
 	};
 
 	return (
