@@ -14,14 +14,15 @@ import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
 import { removeLog } from "../redux/logSlice";
 
 import { selectLogs, setLog } from "../redux/logSlice";
+import { setDragStartLog } from "../redux/dragStartLogSlice";
+import { setDragStartPlan } from "../redux/dragStartPlanSlice";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 	const { logs } = useSelector(selectLogs);
-	const [showEditTimeRecord, setShowEditTimeRecord] = useState(false);
 	const { dragEnd } = useSelector(selectDragEnd);
-
-	const dispatch = useDispatch();
+	const [showEditTimeRecord, setShowEditTimeRecord] = useState(false);
 	const [show, setShow] = useState(false);
+	const dispatch = useDispatch();
 
 	const onEdit = () => {
 		dispatch(setItemLog(logItem));
@@ -42,6 +43,8 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e) => {
 		dispatch(setItemLog(logItem));
+		dispatch(setDragStartLog(true));
+		dispatch(setDragStartPlan(false));
 	};
 
 	//происходит, когда перетаскиваемый элемент покидает цель перетаскивания

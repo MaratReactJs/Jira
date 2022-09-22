@@ -13,7 +13,7 @@ import ToField from "./form/toField";
 import TimeFieldTwo from "./form/timeFieldTwo";
 import SelectFieldTwo from "./form/selectFieldTwo";
 
-const ModalPlan = ({ setShowPlan, createPlan, setPlanSubmit }) => {
+const ModalPlan = ({ setShowPlan, createPlan }) => {
 	const { data } = useSelector(selectData);
 	const dispatch = useDispatch();
 	const handleChange = (target) => {
@@ -24,7 +24,6 @@ const ModalPlan = ({ setShowPlan, createPlan, setPlanSubmit }) => {
 		createPlan();
 		setShowPlan(false);
 		e.preventDefault();
-		setPlanSubmit(true);
 	};
 
 	const removeItem = () => {

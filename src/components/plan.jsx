@@ -8,6 +8,8 @@ import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
 import { removePlan } from "../redux/planSlice";
 import { selectItemPlan, setItemPlan } from "../redux/itemPlanSlice";
+import { setDragStartPlan } from "../redux/dragStartPlanSlice";
+import { setDragStartLog } from "../redux/dragStartLogSlice";
 
 const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 	const { itemPlan } = useSelector(selectItemPlan);
@@ -25,7 +27,9 @@ const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 
 	//происходит, когда пользователь начинает перетаскивать элемент
 	const handleDragStart = (e) => {
-		dispatch(setItemPlan(itemPlan));
+		dispatch(setItemPlan(planItem));
+		dispatch(setDragStartPlan(true));
+		dispatch(setDragStartLog(false));
 	};
 
 	//происходит, когда перетаскиваемый элемент покидает цель перетаскивания

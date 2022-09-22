@@ -5,6 +5,8 @@ import itemLogSlice from "./itemLogSlice";
 import dragEndSlice from "./dragEndSlice";
 import planSlice from "./planSlice";
 import itemPlanSlice from "./itemPlanSlice";
+import dragStartLogSlice from "./dragStartLogSlice";
+import dragStartPlanSlice from "./dragStartPlanSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -14,5 +16,7 @@ export const store = configureStore({
 		dragEndSlice,
 		planSlice,
 		itemPlanSlice,
+		dragStartLogSlice,
+		dragStartPlanSlice,
 	},
 });
