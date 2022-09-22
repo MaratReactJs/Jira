@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 import Log from "./log";
 import ModalLog from "./modalLog";
 import ModalPlan from "./modalPlan";
@@ -19,14 +20,7 @@ import { selectItemPlan } from "../redux/itemPlanSlice";
 import { selectDragStartLog } from "../redux/dragStartLogSlice";
 import { selectDragStartPlan } from "../redux/dragStartPlanSlice";
 
-const Day = ({
-	date,
-	minusWeek,
-	logSubmit,
-	setLogSubmit,
-	planSubmit,
-	setPlanSubmit,
-}) => {
+const Day = ({ date, minusWeek }) => {
 	const [showLog, setShowLog] = useState(false);
 	const [showPlan, setShowPlan] = useState(false);
 
@@ -205,7 +199,11 @@ const Day = ({
 				onDragOver={(e) => handleDragOverArr(e)}
 				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
-				{arrLog.length > 0 && <div>Logs</div>}
+				{arrLog.length > 0 && (
+					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[5%] mb-[5%] mx-[3%]">
+						<span className="bg-[#fff] px-[5%]">LOGS</span>{" "}
+					</h2>
+				)}
 				{arrLog.map((log) => (
 					<Log
 						logItem={log}
@@ -217,7 +215,11 @@ const Day = ({
 						date={date}
 					/>
 				))}
-				{arrPlan.length > 0 && <div>Plans</div>}
+				{arrPlan.length > 0 && (
+					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[5%] mb-[5%] mx-[3%]">
+						<span className="bg-[#fff] px-[5%]">PLANS</span>{" "}
+					</h2>
+				)}
 
 				{arrPlan.map((plan) => (
 					<Plan
