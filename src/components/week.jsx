@@ -9,7 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Week = () => {
-	const [isSubmit, setIsSubmit] = useState(false);
+	const [logSubmit, setLogSubmit] = useState(false);
+	const [planSubmit, setPlanSubmit] = useState(false);
 
 	const [countWeek, setCountWeek] = useState(0);
 	let week = [];
@@ -66,8 +67,10 @@ const Week = () => {
 						date={d}
 						key={i}
 						minusWeek={minusWeek}
-						isSubmit={isSubmit}
-						setIsSubmit={setIsSubmit}
+						logSubmit={logSubmit}
+						setLogSubmit={setLogSubmit}
+						planSubmit={planSubmit}
+						setPlanSubmit={setPlanSubmit}
 					/>
 				))}
 			</div>

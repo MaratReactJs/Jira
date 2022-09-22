@@ -8,18 +8,18 @@ import DescptionField from "./form/descptionField";
 import CheckboxField from "./form/checkboxField";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selectData, setData } from "../redux/dataSlice";
-import { selectLogs, setLog, removeLog } from "../redux/logSlice";
+import { selectPlan, removePlan, setPlan } from "../redux/planSlice";
 
 const EditTimeRecord = ({
 	setShowEditTimeRecord,
-	arrLog,
-	setArrLog,
+	arrPlan,
+	setArrPlan,
 	id,
 	date,
 }) => {
 	const { data } = useSelector(selectData);
 
-	const { logs } = useSelector(selectLogs);
+	const { plans } = useSelector(selectPlan);
 
 	const dispatch = useDispatch();
 	const handleChange = (target) => {
@@ -29,16 +29,16 @@ const EditTimeRecord = ({
 		setShowEditTimeRecord(false);
 		e.preventDefault();
 
-		const upgradeItemLog = {
+		const upgradeItemPlan = {
 			date: data.date ? data.date : date.toISOString().slice(0, 10),
 			id: Math.random(),
 			time: data.time,
 		};
 
-		dispatch(setLog([...logs, upgradeItemLog]));
+		dispatch(setPlan([...plans, upgradeItemPlan]));
 
-		dispatch(removeLog(id));
-		setArrLog(arrLog.filter((log) => log.id !== id));
+		dispatch(removePlan(id));
+		setArrPlan(arrPlan.filter((plan) => plan.id !== id));
 	};
 
 	const closeEditModal = () => {

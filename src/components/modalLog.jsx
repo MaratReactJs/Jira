@@ -9,7 +9,7 @@ import CheckboxField from "./form/checkboxField";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selectData, setData } from "../redux/dataSlice";
 
-const ModalLog = ({ setShowLog, createLog, setIsSubmit }) => {
+const ModalLog = ({ setShowLog, createLog, setLogSubmit }) => {
 	const { data } = useSelector(selectData);
 	const dispatch = useDispatch();
 	const handleChange = (target) => {
@@ -19,7 +19,7 @@ const ModalLog = ({ setShowLog, createLog, setIsSubmit }) => {
 		createLog();
 		setShowLog(false);
 		e.preventDefault();
-		setIsSubmit(true);
+		setLogSubmit(true);
 	};
 
 	const removeItem = () => {

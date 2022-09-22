@@ -13,30 +13,50 @@ import { selectLogs, setLog, removeLog } from "../redux/logSlice";
 import { selectData } from "../redux/dataSlice";
 import { selectItemLog } from "../redux/itemLogSlice";
 import { setDragEnd } from "../redux/dragEndSlice";
+import { removePlan, selectPlan, setPlan } from "../redux/planSlice";
+import Plan from "./plan";
 
-const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
+const Day = ({
+	date,
+	minusWeek,
+	logSubmit,
+	setLogSubmit,
+	planSubmit,
+	setPlanSubmit,
+}) => {
 	const [showLog, setShowLog] = useState(false);
 	const [showPlan, setShowPlan] = useState(false);
 	//console.log(data.date, "data");
 	const dispatch = useDispatch();
 	const { logs } = useSelector(selectLogs);
+	const { plans } = useSelector(selectPlan);
 	const { data } = useSelector(selectData);
 	const { itemLog } = useSelector(selectItemLog);
 	const [arrLog, setArrLog] = useState([]);
-
-	localStorage.setItem("logs", JSON.stringify(logs));
+	const [arrPlan, setArrPlan] = useState([]);
 
 	useEffect(() => {
 		setArrLog([]);
 	}, [minusWeek]);
 
-	if (isSubmit) {
+	if (logSubmit) {
 		for (let i = 0; i < logs.length; i++) {
 			if (
 				arrLog.find((log) => log.id === logs[i].id) !== logs[i] &&
 				logs[i].date === date.toISOString().slice(0, 10)
 			) {
 				arrLog.push(logs[i]);
+			}
+		}
+	}
+
+	if (planSubmit) {
+		for (let i = 0; i < plans.length; i++) {
+			if (
+				arrPlan.find((plan) => plan.id === plans[i].id) !== plans[i] &&
+				plans[i].date === date.toISOString().slice(0, 10)
+			) {
+				arrPlan.push(plans[i]);
 			}
 		}
 	}
@@ -61,6 +81,19 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 		);
 	}, [date, dispatch, logs, data]);
 
+	const createPlan = useCallback(() => {
+		dispatch(
+			setPlan([
+				...plans,
+				{
+					date: data.date ? data.date : date.toISOString().slice(0, 10),
+					id: Math.random(),
+					time: data.time,
+				},
+			])
+		);
+	}, [date, dispatch, plans, data]);
+
 	const handleDragLeave = (e) => {
 		e.preventDefault();
 		dayRef.current.style.boxSizing = "border-box";
@@ -73,7 +106,9 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 			id: Math.random(),
 			time: itemLog.time,
 		};
+		//if
 		dispatch(setLog([...logs, upgradeItem]));
+		dispatch(setPlan([...plans, upgradeItem]));
 		dispatch(setDragEnd(true));
 
 		dayRef.current.style.boxSizing = "border-box";
@@ -88,6 +123,11 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 	const deleteLog = (id) => {
 		setArrLog(arrLog.filter((log) => log.id !== id));
 		dispatch(removeLog(id));
+	};
+
+	const deletePlan = (id) => {
+		setArrPlan(arrPlan.filter((plan) => plan.id !== id));
+		dispatch(removePlan(id));
 	};
 
 	return (
@@ -151,15 +191,28 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 				onDragOver={(e) => handleDragOverArr(e)}
 				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
-				{" "}
-				{arrLog.map((d) => (
+				{arrLog.length > 0 && <div>Logs</div>}
+				{arrLog.map((log) => (
 					<Log
-						logItem={d}
-						key={d.id}
+						logItem={log}
+						key={log.id}
 						deleteLog={deleteLog}
-						id={d.id}
+						id={log.id}
 						arrLog={arrLog}
 						setArrLog={setArrLog}
+						date={date}
+					/>
+				))}
+				{arrPlan.length > 0 && <div>Plans</div>}
+
+				{arrPlan.map((plan) => (
+					<Plan
+						planItem={plan}
+						key={plan.id}
+						deletePlan={deletePlan}
+						id={plan.id}
+						arrPlan={arrPlan}
+						setArrPlan={setArrPlan}
 						date={date}
 					/>
 				))}
@@ -168,14 +221,14 @@ const Day = ({ date, minusWeek, isSubmit, setIsSubmit }) => {
 				<ModalLog
 					setShowLog={setShowLog}
 					createLog={createLog}
-					setIsSubmit={setIsSubmit}
+					setLogSubmit={setLogSubmit}
 				/>
 			)}
 			{showPlan && (
 				<ModalPlan
 					setShowPlan={setShowPlan}
-					createLog={createLog}
-					setIsSubmit={setIsSubmit}
+					createPlan={createPlan}
+					setPlanSubmit={setPlanSubmit}
 				/>
 			)}
 		</div>
