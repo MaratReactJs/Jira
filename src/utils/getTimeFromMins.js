@@ -2,10 +2,10 @@ export function getTimeFromMins(mins) {
 	let hours = Math.trunc(mins / 60);
 	let minutes = mins % 60;
 	if (hours < 1) {
-		return minutes + "min";
+		return minutes + "m";
 	} else if (minutes < 1) {
 		return hours + "h";
 	} else {
-		return hours + "h " + minutes + "min";
+		return hours + "h " + minutes + "m";
 	}
 }

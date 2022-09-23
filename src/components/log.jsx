@@ -33,6 +33,8 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 			date: logItem.date,
 			id: Math.random(),
 			time: logItem.time,
+			search: logItem.search,
+			description: logItem.description,
 		};
 
 		dispatch(setLog([...logs, upgradeCopyLog]));
@@ -83,7 +85,7 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 				<p className="font-bold text-sm text-[#425871]  ml-[10px] mt-[5px] absolute">
 					{logItem.search}
 				</p>
-				<p className="font-normal text-xs text-[#425871]  ml-[10px] mt-[25px] absolute">
+				<p className="font-semibold text-sm text-[#425871]  ml-[10px] mt-[23px] absolute">
 					{logItem.description}
 				</p>
 				<h1 className="font-normal text-xs flex items-center  text-[#425871] ml-[10px] mt-[45px]  absolute">
@@ -93,9 +95,9 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 					/>
 					AD-12434
 				</h1>
-				<div className="font-bold text-xs text-[#425871] mt-[45px]  ml-[170px] fixed ">
+				<p className="w-[50px] font-bold text-sm text-[#425871] mt-[45px] text-right  ml-[175px] fixed ">
 					{getTimeFromMins(logItem.time)}
-				</div>
+				</p>
 				<div
 					className={
 						"w-[30%] h-[25px] bg-[#004976] text-white z-10  relative top-1 left-[155px] flex justify-around items-center rounded  " +

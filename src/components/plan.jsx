@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Moment from "react-moment";
+import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,24 +58,34 @@ const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 	return (
 		<>
 			<div
-				className=" w-[94%] min-w-[100px] bg-[#f1f5f7] min-h-[70px] mt-[5px] ml-[3%]  text-center border-solid border border-[red] rounded-sm hover:border-black z-20 "
+				className=" w-[94%] min-w-[100px] bg-[#fff] min-h-[70px] mt-[5px] ml-[3%]  text-center border-solid border border-[#d6e2e9] rounded-sm hover:border-black z-20 "
 				draggable={true}
 				onMouseOver={() => setShow(true)}
 				onMouseOut={() => setShow(false)}
 				onDragStart={(e) => handleDragStart(e, planItem)}
 				onDragLeave={(e) => handleDragLeave(e)}
 				onDragOver={(e) => handleDragOver(e)}
-				/* onDrop={(e) => handleDrop(e, logItem)} */
+				/* onDrop={(e) => handleDrop(e, planItem)} */
 				onDragEnd={(e) => handleDragEnd(e, planItem)}>
-				<div className="font-bold text-xs  ml-2 mt-1 absolute">
-					<Moment format="DD MMM YYYY">{Date.parse(planItem.date)}</Moment>{" "}
-				</div>
-				<div className="font-bold text-xs mt-[40px]  ml-[8%] fixed ">
+				<p className="font-bold text-sm text-[#425871]  ml-[10px] mt-[5px] absolute">
+					{planItem.search}
+				</p>
+				<p className="font-semibold text-sm text-[#425871]  ml-[10px] mt-[23px] absolute">
+					{planItem.description}
+				</p>
+				<h1 className="font-normal text-xs flex items-center  text-[#425871]  ml-[10px] mt-[45px]  absolute">
+					<FontAwesomeIcon
+						icon={faAnglesRight}
+						className="h-[12px] p-[2px] text-[#fff] bg-[#00c3f2] mr-[5px]  "
+					/>
+					AD-12434
+				</h1>
+				<p className="w-[50px] font-bold text-sm text-[#425871] mt-[45px] text-right  ml-[175px] fixed ">
 					{getTimeFromMins(planItem.time)}
-				</div>
+				</p>
 				<div
 					className={
-						"w-[40%] h-[25px] bg-[#004976] text-white z-10  relative top-[5%] left-[58%] flex justify-around items-center rounded  " +
+						"w-[20%] h-[25px] bg-[#004976] text-white z-10  relative top-1 left-[177px] flex justify-around items-center rounded  " +
 						(!show ? "hidden " : "")
 					}>
 					<button onClick={() => deletePlan(id)} className="decoration-white">

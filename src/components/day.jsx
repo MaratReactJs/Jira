@@ -59,6 +59,8 @@ const Day = ({ date, minusWeek }) => {
 				...plans,
 				{
 					date: data.date ? data.date : date.toISOString().slice(0, 10),
+					search: data.search,
+					description: data.descriptionFieldTwo,
 					id: Math.random(),
 					time: data.timeFieldTwo,
 				},

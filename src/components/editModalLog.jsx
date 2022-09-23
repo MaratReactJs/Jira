@@ -26,6 +26,8 @@ const EditModalLog = ({ setShowEditModalLog, arrLog, setArrLog, id, date }) => {
 			date: data.date ? data.date : date.toISOString().slice(0, 10),
 			id: Math.random(),
 			time: data.time,
+			search: data.search,
+			description: data.description,
 		};
 
 		dispatch(setLog([...logs, upgradeItemLog]));
