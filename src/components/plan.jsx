@@ -58,7 +58,7 @@ const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 	return (
 		<>
 			<div
-				className=" w-[94%] min-w-[100px] bg-[#f1f5f7] h-[60px] mt-[5px] ml-[3%]  text-center border-solid border border-[red] rounded-sm hover:border-black z-20 "
+				className=" w-[94%] min-w-[100px] bg-[#f1f5f7] min-h-[70px] mt-[5px] ml-[3%]  text-center border-solid border border-[red] rounded-sm hover:border-black z-20 "
 				draggable={true}
 				onMouseOver={() => setShow(true)}
 				onMouseOut={() => setShow(false)}

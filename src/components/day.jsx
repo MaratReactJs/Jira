@@ -44,6 +44,8 @@ const Day = ({ date, minusWeek }) => {
 				...logs,
 				{
 					date: data.date ? data.date : date.toISOString().slice(0, 10),
+					search: data.search,
+					description: data.description,
 					id: Math.random(),
 					time: data.time,
 				},
@@ -110,6 +112,8 @@ const Day = ({ date, minusWeek }) => {
 				date: date.toISOString().slice(0, 10),
 				id: Math.random(),
 				time: itemLog.time,
+				search: itemLog.search,
+				description: itemLog.description,
 			};
 			dispatch(setLog([...logs, upgradeItem]));
 		}
@@ -138,7 +142,7 @@ const Day = ({ date, minusWeek }) => {
 		<div
 			ref={dayRef}
 			className={
-				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[150px]  select-none  " +
+				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[250px]  select-none  " +
 				(date.toString().slice(0, 10) === new Date().toString().slice(0, 10)
 					? "bg-[#f5f8fa]"
 					: "")
