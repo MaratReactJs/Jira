@@ -8,41 +8,34 @@ import DescptionField from "./form/descptionField";
 import CheckboxField from "./form/checkboxField";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { selectData, setData } from "../redux/dataSlice";
-import { selectPlan, removePlan, setPlan } from "../redux/planSlice";
+import { selectLogs, setLog, removeLog } from "../redux/logSlice";
 
-const EditTimeRecord = ({
-	setShowEditTimeRecord,
-	arrPlan,
-	setArrPlan,
-	id,
-	date,
-}) => {
+const EditModalLog = ({ setShowEditModalLog, arrLog, setArrLog, id, date }) => {
 	const { data } = useSelector(selectData);
-
-	const { plans } = useSelector(selectPlan);
-
+	const { logs } = useSelector(selectLogs);
 	const dispatch = useDispatch();
+
 	const handleChange = (target) => {
 		dispatch(setData({ ...data, [target.name]: target.value }));
 	};
 	const handleSubmit = (e) => {
-		setShowEditTimeRecord(false);
+		setShowEditModalLog(false);
 		e.preventDefault();
 
-		const upgradeItemPlan = {
+		const upgradeItemLog = {
 			date: data.date ? data.date : date.toISOString().slice(0, 10),
 			id: Math.random(),
 			time: data.time,
 		};
 
-		dispatch(setPlan([...plans, upgradeItemPlan]));
+		dispatch(setLog([...logs, upgradeItemLog]));
 
-		dispatch(removePlan(id));
-		setArrPlan(arrPlan.filter((plan) => plan.id !== id));
+		dispatch(removeLog(id));
+		setArrLog(arrLog.filter((log) => log.id !== id));
 	};
 
 	const closeEditModal = () => {
-		setShowEditTimeRecord(false);
+		setShowEditModalLog(false);
 	};
 	return (
 		<div
@@ -97,4 +90,4 @@ const EditTimeRecord = ({
 	);
 };
 
-export default EditTimeRecord;
+export default EditModalLog;

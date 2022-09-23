@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Moment from "react-moment";
-import EditTimeRecord from "./editTimeRecord";
+import EditModalLog from "./editModalLog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faTrashCan,
@@ -12,7 +12,6 @@ import { setItemLog } from "../redux/itemLogSlice";
 import { getTimeFromMins } from "../utils/getTimeFromMins";
 import { selectDragEnd, setDragEnd } from "../redux/dragEndSlice";
 import { removeLog } from "../redux/logSlice";
-
 import { selectLogs, setLog } from "../redux/logSlice";
 import { setDragStartLog } from "../redux/dragStartLogSlice";
 import { setDragStartPlan } from "../redux/dragStartPlanSlice";
@@ -20,14 +19,13 @@ import { setDragStartPlan } from "../redux/dragStartPlanSlice";
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 	const { logs } = useSelector(selectLogs);
 	const { dragEnd } = useSelector(selectDragEnd);
-	const [showEditTimeRecord, setShowEditTimeRecord] = useState(false);
+	const [showEditModalLog, setShowEditModalLog] = useState(false);
 	const [show, setShow] = useState(false);
 	const dispatch = useDispatch();
 
 	const onEdit = () => {
 		dispatch(setItemLog(logItem));
-
-		setShowEditTimeRecord(true);
+		setShowEditModalLog(true);
 	};
 
 	const copyLog = () => {
@@ -104,9 +102,9 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 					</button>
 				</div>
 			</div>
-			{showEditTimeRecord && (
-				<EditTimeRecord
-					setShowEditTimeRecord={setShowEditTimeRecord}
+			{showEditModalLog && (
+				<EditModalLog
+					setShowEditModalLog={setShowEditModalLog}
 					arrLog={arrLog}
 					setArrLog={setArrLog}
 					id={id}

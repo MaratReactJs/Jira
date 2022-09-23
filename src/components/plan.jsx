@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Moment from "react-moment";
-import EditTimeRecord from "./editTimeRecord";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,10 +9,11 @@ import { removePlan } from "../redux/planSlice";
 import { selectItemPlan, setItemPlan } from "../redux/itemPlanSlice";
 import { setDragStartPlan } from "../redux/dragStartPlanSlice";
 import { setDragStartLog } from "../redux/dragStartLogSlice";
+import EditModalPlan from "./editModalPlan";
 
 const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 	const { itemPlan } = useSelector(selectItemPlan);
-	const [showEditTimeRecord, setShowEditTimeRecord] = useState(false);
+	const [showEditModalPlan, setShowEditModalPlan] = useState(false);
 	const { dragEnd } = useSelector(selectDragEnd);
 
 	const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 	const onEdit = () => {
 		dispatch(setItemPlan(itemPlan));
 
-		setShowEditTimeRecord(true);
+		setShowEditModalPlan(true);
 	};
 
 	//происходит, когда пользователь начинает перетаскивать элемент
@@ -86,9 +86,9 @@ const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 					</button>
 				</div>
 			</div>
-			{showEditTimeRecord && (
-				<EditTimeRecord
-					setShowEditTimeRecord={setShowEditTimeRecord}
+			{showEditModalPlan && (
+				<EditModalPlan
+					setShowEditModalPlan={setShowEditModalPlan}
 					arrPlan={arrPlan}
 					setArrPlan={setArrPlan}
 					id={id}

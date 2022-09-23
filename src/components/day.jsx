@@ -32,10 +32,6 @@ const Day = ({ date, minusWeek }) => {
 	const { dragStartLog } = useSelector(selectDragStartLog);
 	const { dragStartPlan } = useSelector(selectDragStartPlan);
 	const dispatch = useDispatch();
-	const timeArr = arrLog.map((item) => item.time);
-	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
-	const dayRef = useRef();
-	let percent = Math.ceil((timeSum / 480) * 100);
 
 	useEffect(() => {
 		setArrLog([]);
@@ -95,6 +91,11 @@ const Day = ({ date, minusWeek }) => {
 			arrPlan.push(plans[i]);
 		}
 	}
+
+	const timeArr = arrLog.map((item) => item.time);
+	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
+	const dayRef = useRef();
+	let percent = Math.ceil((timeSum / 480) * 100);
 
 	//Drag-and-drop
 	const handleDragLeave = (e) => {
@@ -196,7 +197,7 @@ const Day = ({ date, minusWeek }) => {
 				onDragLeave={(e) => handleDragLeave(e)}>
 				{arrLog.length > 0 && (
 					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[5%] mb-[5%] mx-[3%]">
-						<span className="bg-[#fff] px-[5%]">LOGS</span>{" "}
+						<span className="bg-[#fff] px-[5%]">WORKLOGS</span>{" "}
 					</h2>
 				)}
 				{arrLog.map((log) => (
