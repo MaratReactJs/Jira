@@ -197,7 +197,16 @@ const Day = ({ date, minusWeek }) => {
 				onDragLeave={(e) => handleDragLeave(e)}>
 				{arrLog.length > 0 && (
 					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[5%] mb-[5%] mx-[3%]">
-						<span className="bg-[#fff] px-[5%]">WORKLOGS</span>{" "}
+						<span
+							className={
+								"px-[5%] " +
+								(date.toString().slice(0, 10) ===
+								new Date().toString().slice(0, 10)
+									? "bg-[#f5f8fa]"
+									: "bg-[#fff]")
+							}>
+							WORKLOGS
+						</span>{" "}
 					</h2>
 				)}
 				{arrLog.map((log) => (
@@ -213,7 +222,16 @@ const Day = ({ date, minusWeek }) => {
 				))}
 				{arrPlan.length > 0 && (
 					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[5%] mb-[5%] mx-[3%]">
-						<span className="bg-[#fff] px-[5%]">PLANS</span>{" "}
+						<span
+							className={
+								"px-[5%] " +
+								(date.toString().slice(0, 10) ===
+								new Date().toString().slice(0, 10)
+									? "bg-[#f5f8fa]"
+									: "bg-[#fff]")
+							}>
+							PLANS
+						</span>{" "}
 					</h2>
 				)}
 

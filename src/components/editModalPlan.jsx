@@ -34,7 +34,7 @@ const EditModalPlan = ({
 		const upgradeItemPlan = {
 			date: data.date ? data.date : date.toISOString().slice(0, 10),
 			id: Math.random(),
-			time: data.time,
+			time: data.timeFieldTwo,
 		};
 		dispatch(setPlan([...plans, upgradeItemPlan]));
 		dispatch(removePlan(id));
