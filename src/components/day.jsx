@@ -59,8 +59,8 @@ const Day = ({ date, minusWeek }) => {
 				...plans,
 				{
 					date: data.date ? data.date : date.toISOString().slice(0, 10),
-					search: data.search,
-					description: data.descriptionFieldTwo,
+					search: data.selectField,
+					description: data.descriptionTwo,
 					id: Math.random(),
 					time: data.timeFieldTwo,
 				},
@@ -144,7 +144,7 @@ const Day = ({ date, minusWeek }) => {
 		<div
 			ref={dayRef}
 			className={
-				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[250px]  select-none  " +
+				"w-[calc(90vw/7)] border-l border-r box-border border-y border-[#dee3ed]  min-w-[100px]  select-none  " +
 				(date.toString().slice(0, 10) === new Date().toString().slice(0, 10)
 					? "bg-[#f5f8fa]"
 					: "")
@@ -202,7 +202,7 @@ const Day = ({ date, minusWeek }) => {
 				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
 				{arrLog.length > 0 && (
-					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[5%] mb-[5%] mx-[3%]">
+					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[6%] mb-[5%] mx-[3%]">
 						<span
 							className={
 								"px-[5%] " +
@@ -227,7 +227,7 @@ const Day = ({ date, minusWeek }) => {
 					/>
 				))}
 				{arrPlan.length > 0 && (
-					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[5%] mb-[5%] mx-[3%]">
+					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[6%] mb-[5%] mx-[3%]">
 						<span
 							className={
 								"px-[5%] " +

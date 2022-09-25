@@ -95,12 +95,12 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 					/>
 					AD-12434
 				</h1>
-				<p className="w-[50px] font-bold text-sm text-[#425871] mt-[45px] text-right  ml-[175px] fixed ">
+				<p className="w-[50px] font-bold text-sm text-[#425871] mt-[3%] text-right  ml-[8%] fixed ">
 					{getTimeFromMins(logItem.time)}
 				</p>
 				<div
 					className={
-						"w-[30%] h-[25px] bg-[#004976] text-white z-10  relative top-1 left-[155px] flex justify-around items-center rounded  " +
+						"w-[30%] h-[25px] bg-[#004976] text-white z-10  relative top-1 left-[65%] flex justify-around items-center rounded  " +
 						(!show ? "hidden " : "")
 					}>
 					<button onClick={() => deleteLog(id)} className="decoration-white">
