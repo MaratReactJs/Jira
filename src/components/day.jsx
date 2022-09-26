@@ -97,6 +97,7 @@ const Day = ({ date, minusWeek }) => {
 	}
 
 	const timeArr = arrLog.map((item) => item.time);
+	console.log(timeArr);
 	const timeSum = timeArr.map(Number).reduce((a, b) => a + b, 0);
 	const dayRef = useRef();
 	let percent = Math.ceil((timeSum / 480) * 100);
@@ -204,7 +205,7 @@ const Day = ({ date, minusWeek }) => {
 				onDrop={(e) => handleDropArr(e)}
 				onDragLeave={(e) => handleDragLeave(e)}>
 				{arrLog.length > 0 && (
-					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[6%] mb-[5%] mx-[3%]">
+					<h2 className=" w-[93%] text-center  border-b-2 border-solid border-[#adc4d3] leading-[0.1em] mt-[6%] mb-[5%] mx-[3%]">
 						<span
 							className={
 								"px-[5%] " +
@@ -229,7 +230,7 @@ const Day = ({ date, minusWeek }) => {
 					/>
 				))}
 				{arrPlan.length > 0 && (
-					<h2 className=" w-[93%] text-center border-b border-solid border-[#adc4d3] leading-[0.1em] mt-[6%] mb-[5%] mx-[3%]">
+					<h2 className=" w-[93%] text-center border-b-2 border-solid border-[#adc4d3] leading-[0.1em] mt-[6%] mb-[5%] mx-[3%]">
 						<span
 							className={
 								"px-[5%] " +
