@@ -15,7 +15,7 @@ const TimeFieldTwo = ({ value, onChange }) => {
 				type="text"
 				className="w-[34%] border border-[#dee3ed] rounded  focus:outline-none  focus:border-[#dee3ed] w-[40%] p-[6px] inline mr-[3%] mt-[0.5%] ml-[2.3%]"
 				name="timeFieldTwo"
-				value={value}
+				value={(value = value.replace(/[^\d]/g, ""))}
 				onChange={handleChange}
 				placeholder="0h"
 				id="timeFieldTwo"

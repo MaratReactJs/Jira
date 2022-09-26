@@ -24,6 +24,22 @@ const ModalPlan = ({ setShowPlan, createPlan }) => {
 		createPlan();
 		setShowPlan(false);
 		e.preventDefault();
+		dispatch(
+			setData({
+				checkbox: false,
+				date: "",
+				time: "",
+				description: "",
+				search: "",
+				descriptionTwo: "",
+				selectField: "",
+				checkboxTwo: false,
+				fromField: "",
+				toField: "",
+				timeFieldTwo: "",
+				selectFieldTwo: "",
+			})
+		);
 	};
 
 	const removeItem = () => {

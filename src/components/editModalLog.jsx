@@ -34,6 +34,22 @@ const EditModalLog = ({ setShowEditModalLog, arrLog, setArrLog, id, date }) => {
 
 		dispatch(removeLog(id));
 		setArrLog(arrLog.filter((log) => log.id !== id));
+		dispatch(
+			setData({
+				checkbox: false,
+				date: "",
+				time: "",
+				description: "",
+				search: "",
+				descriptionTwo: "",
+				selectField: "",
+				checkboxTwo: false,
+				fromField: "",
+				toField: "",
+				timeFieldTwo: "",
+				selectFieldTwo: "",
+			})
+		);
 	};
 
 	const closeEditModal = () => {

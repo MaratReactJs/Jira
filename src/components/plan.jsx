@@ -12,6 +12,7 @@ import { removePlan } from "../redux/planSlice";
 import { selectItemPlan, setItemPlan } from "../redux/itemPlanSlice";
 import { setDragStartPlan } from "../redux/dragStartPlanSlice";
 import { setDragStartLog } from "../redux/dragStartLogSlice";
+import { setData } from "../redux/dataSlice";
 import EditModalPlan from "./editModalPlan";
 
 const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
@@ -26,6 +27,22 @@ const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 		dispatch(setItemPlan(itemPlan));
 
 		setShowEditModalPlan(true);
+		dispatch(
+			setData({
+				checkbox: false,
+				date: date.toISOString().slice(0, 10),
+				time: "",
+				description: "",
+				search: "",
+				descriptionTwo: "",
+				selectField: "",
+				checkboxTwo: false,
+				fromField: "",
+				toField: "",
+				timeFieldTwo: "",
+				selectFieldTwo: "",
+			})
+		);
 	};
 
 	//происходит, когда пользователь начинает перетаскивать элемент

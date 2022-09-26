@@ -41,6 +41,22 @@ const EditModalPlan = ({
 		dispatch(setPlan([...plans, upgradeItemPlan]));
 		dispatch(removePlan(id));
 		setArrPlan(arrPlan.filter((plan) => plan.id !== id));
+		dispatch(
+			setData({
+				checkbox: false,
+				date: "",
+				time: "",
+				description: "",
+				search: "",
+				descriptionTwo: "",
+				selectField: "",
+				checkboxTwo: false,
+				fromField: "",
+				toField: "",
+				timeFieldTwo: "",
+				selectFieldTwo: "",
+			})
+		);
 	};
 
 	const removeItem = () => {
