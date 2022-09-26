@@ -95,9 +95,9 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 					/>
 					AD-12434
 				</h1>
-				<p className="w-[50px] font-bold text-sm text-[#425871] mt-[3%] text-right  ml-[8%] fixed ">
+				<h2 className="w-[50px] font-bold text-sm text-[#425871]  mt-[2.7%] text-right  ml-[8.5%] absolute ">
 					{getTimeFromMins(logItem.time)}
-				</p>
+				</h2>
 				<div
 					className={
 						"w-[30%] h-[25px] bg-[#004976] text-white z-10  relative top-1 left-[65%] flex justify-around items-center rounded  " +

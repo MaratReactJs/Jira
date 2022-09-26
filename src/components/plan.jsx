@@ -83,11 +83,11 @@ const Plan = ({ planItem, deletePlan, id, arrPlan, setArrPlan, date }) => {
 				<h1 className="font-normal text-xs flex items-center  text-[#425871]  ml-[1%] mt-[45px]  absolute">
 					<FontAwesomeIcon
 						icon={faAnglesRight}
-						className="h-[12px] p-[2px] text-[#fff] bg-[#00c3f2] mr-[5px]  "
+						className="h-[12px] p-[2px] text-[#fff] bg-[#00c3f2] mr-[5px]"
 					/>
 					AD-12434
 				</h1>
-				<p className="w-[50px] font-bold text-sm text-[#425871] mt-[3%] text-right  ml-[8%] fixed ">
+				<p className="w-[50px] font-bold text-sm text-[#425871] mt-[2.7%] text-right  ml-[8.5%] absolute ">
 					{getTimeFromMins(planItem.time)}
 				</p>
 				<div
