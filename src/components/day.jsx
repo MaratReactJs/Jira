@@ -125,6 +125,8 @@ const Day = ({ date, minusWeek }) => {
 				date: date.toISOString().slice(0, 10),
 				id: Math.random(),
 				time: itemPlan.time,
+				search: itemPlan.search,
+				description: itemPlan.description,
 			};
 			dispatch(setPlan([...plans, upgradeItem]));
 		}

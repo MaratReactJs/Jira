@@ -15,6 +15,7 @@ import { removeLog } from "../redux/logSlice";
 import { selectLogs, setLog } from "../redux/logSlice";
 import { setDragStartLog } from "../redux/dragStartLogSlice";
 import { setDragStartPlan } from "../redux/dragStartPlanSlice";
+import { setData } from "../redux/dataSlice";
 
 const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 	const { logs } = useSelector(selectLogs);
@@ -26,6 +27,23 @@ const Log = ({ logItem, deleteLog, id, arrLog, setArrLog, date }) => {
 	const onEdit = () => {
 		dispatch(setItemLog(logItem));
 		setShowEditModalLog(true);
+		dispatch(setData());
+		dispatch(
+			setData({
+				checkbox: false,
+				date: date.toISOString().slice(0, 10),
+				time: "",
+				description: "",
+				search: "",
+				descriptionTwo: "",
+				selectField: "",
+				checkboxTwo: false,
+				fromField: "",
+				toField: "",
+				timeFieldTwo: "",
+				selectFieldTwo: "",
+			})
+		);
 	};
 
 	const copyLog = () => {

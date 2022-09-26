@@ -10,8 +10,8 @@ const ToField = ({ value, onChange }) => {
 				To
 			</label>
 			<input
-				type="text"
-				className="w-[34%] ml-[3%] border border-[#dee3ed] rounded  focus:outline-none  focus:border-[#dee3ed] w-[40%] p-[6px] inline mr-[3%] mt-[0.5%]"
+				type="time"
+				className="w-[23%] ml-[3%] border border-[#dee3ed] rounded  focus:outline-none  focus:border-[#dee3ed] w-[40%] p-[6px] inline mr-[3%] mt-[0.5%]"
 				name="toField"
 				value={value}
 				onChange={handleChange}

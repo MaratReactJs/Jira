@@ -35,6 +35,8 @@ const EditModalPlan = ({
 			date: data.date ? data.date : date.toISOString().slice(0, 10),
 			id: Math.random(),
 			time: data.timeFieldTwo,
+			search: data.selectField,
+			description: data.descriptionTwo,
 		};
 		dispatch(setPlan([...plans, upgradeItemPlan]));
 		dispatch(removePlan(id));
@@ -50,7 +52,7 @@ const EditModalPlan = ({
 			className="w-[100vw] h-[100vh] bg-[#00497652] fixed top-0 left-0 flex justify-center items-center z-20"
 			onClick={removeItem}>
 			<div
-				className="min-w-[30vw] min-h-[70vh] p-[20px] rounded min-w-[10vw] min-h-[50vh] bg-white border  "
+				className="min-w-[30vw] min-h-[70vh] p-[20px] rounded bg-white border  "
 				onClick={(e) => e.stopPropagation()}>
 				<form onSubmit={handleSubmit}>
 					<div>

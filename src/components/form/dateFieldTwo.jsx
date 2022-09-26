@@ -11,7 +11,7 @@ const DateFieldTwo = ({ value, onChange }) => {
 			</label>
 
 			<input
-				className="w-[35%] ml-[3%] border border-[#dee3ed] rounded p-[5px] focus:outline-none  focus:border-[#004976] mt-[0.5%]  "
+				className="w-[27%] ml-[3%] border border-[#dee3ed] rounded p-[5px] focus:outline-none  focus:border-[#004976] mt-[0.5%]  "
 				name="date"
 				type="date"
 				id="date"

@@ -19,6 +19,22 @@ const ModalLog = ({ setShowLog, createLog }) => {
 		createLog();
 		setShowLog(false);
 		e.preventDefault();
+		dispatch(
+			setData({
+				checkbox: false,
+				date: "",
+				time: "",
+				description: "",
+				search: "",
+				descriptionTwo: "",
+				selectField: "",
+				checkboxTwo: false,
+				fromField: "",
+				toField: "",
+				timeFieldTwo: "",
+				selectFieldTwo: "",
+			})
+		);
 	};
 
 	const removeItem = () => {
